@@ -1,0 +1,4 @@
+.content {
+  display: grid;
+  grid-template-rows: 0 [profile] auto 50px [elements] auto;
+}
