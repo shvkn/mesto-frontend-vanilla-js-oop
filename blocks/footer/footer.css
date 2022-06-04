@@ -1,0 +1,4 @@
+.footer {
+  grid-row: footer;
+  grid-column: footer-s / footer-e;
+}

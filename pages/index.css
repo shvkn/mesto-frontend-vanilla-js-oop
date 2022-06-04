@@ -31,3 +31,6 @@
 @import "../blocks/element/__like-btn/_active/element__like-btn_active.css";
 @import "../blocks/element/__heading/element__heading.css";
 @import "../blocks/element/__image-container/element__image-container.css";
+
+@import "../blocks/footer/footer.css";
+@import "../blocks/footer/__copyright/footer__copyright.css";
