@@ -1,26 +1,40 @@
 <!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="./pages/index.css" rel="stylesheet">
-    <title>Mesto</title>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="./pages/index.css" rel="stylesheet">
+  <title>Mesto</title>
 </head>
 <body class="page">
-  <div class="layout">
-    <main class="content">
-      <div class="profile">
-        <img src="./images/profile-avatar.jpg" alt="Жак-Ив Кусто. Исследователь океана." class="profile__avatar">
-        <div class="profile__info">
-          <h2 class="profile__name">Жак-Ив Кусто<a href="#" class="button profile__edit-btn"></a>
-          </h2>
-          <p class="profile__caption">Исследователь океана</p>
-        </div>
-        <a href="#" class="button profile__add-btn"></a>
+<div class="layout">
+  <main class="content">
+    <div class="profile">
+      <img src="./images/profile-avatar.jpg" alt="Жак-Ив Кусто. Исследователь океана." class="profile__avatar">
+      <div class="profile__info">
+        <h2 class="profile__name">Жак-Ив Кусто<a href="#" class="button profile__edit-btn"></a>
+        </h2>
+        <p class="profile__caption">Исследователь океана</p>
       </div>
-    </main>
-  </div>
+      <a href="#" class="button profile__add-btn"></a>
+    </div>
+
+  </main>
+</div>
+
+<div class="popup">
+  <form action="#" class="popup__content">
+    <fieldset class="popup__fieldset">
+      <legend class="popup__fieldset-title">Редактировать профиль</legend>
+      <input type="text" class="popup__input" name="profile-name" value="Жак-Ив Кусто" placeholder="Имя">
+      <input type="text" class="popup__input" name="profile-caption" value="Исследователь океана" placeholder="Подпись">
+    </fieldset>
+    <a href="#" class="button popup__close-btn"></a>
+    <input type="submit" class="button popup__submit-btn" value="Сохранить">
+  </form>
+</div>
+
 </body>
 </html>

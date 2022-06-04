@@ -6,6 +6,13 @@
 @import "../blocks/content/content.css";
 @import "../blocks/button/button.css";
 
+@import "../blocks/popup/popup.css";
+@import "../blocks/popup/popup__input/popup__input.css";
+@import "../blocks/popup/popup__content/popup__content.css";
+@import "../blocks/popup/popup__fieldset/popup__fieldset.css";
+@import "../blocks/popup/popup__fieldset-title/popup__fieldset-title.css";
+@import "../blocks/popup/popup__close-btn/popup__close-btn.css";
+
 @import "../blocks/profile/profile.css";
 @import "../blocks/profile/__avatar/profile__avatar.css";
 @import "../blocks/profile/__edit-btn/profile__edit-btn.css";
