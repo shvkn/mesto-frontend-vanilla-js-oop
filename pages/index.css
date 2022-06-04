@@ -3,3 +3,14 @@
 
 @import "../blocks/page/page.css";
 @import "../blocks/layout/layout.css";
+@import "../blocks/content/content.css";
+@import "../blocks/button/button.css";
+
+@import "../blocks/profile/profile.css";
+@import "../blocks/profile/__avatar/profile__avatar.css";
+@import "../blocks/profile/__edit-btn/profile__edit-btn.css";
+@import "../blocks/profile/__add-btn/profile__add-btn.css";
+@import "../blocks/profile/__info/profile__info.css";
+@import "../blocks/profile/__name/profile__name.css";
+@import "../blocks/profile/__caption/profile__caption.css";
+
