@@ -2,21 +2,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  display: flex;
+  display: none;
   width: 100vw;
   height: 100vh;
   background-color: rgb(0 0 0 / 50%);
-}
-
-
-
-.popup__submit-btn {
-  width: 100%;
-  padding: 14px 0;
-  background-color: #000;
-  color: #fff;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 17px;
 }

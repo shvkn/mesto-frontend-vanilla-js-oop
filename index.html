@@ -24,15 +24,19 @@
   </main>
 </div>
 
-<div class="popup">
-  <form action="#" class="popup__content">
+<div class="popup popup_opened">
+  <form action="#" class="popup__container">
+    <h2 class="popup__heading">Редактировать профиль</h2>
     <fieldset class="popup__fieldset">
-      <legend class="popup__fieldset-title">Редактировать профиль</legend>
-      <input type="text" class="popup__input" name="profile-name" value="Жак-Ив Кусто" placeholder="Имя">
-      <input type="text" class="popup__input" name="profile-caption" value="Исследователь океана" placeholder="Подпись">
+      <input type="text" class="popup__input"
+             name="profile-name" id="profile-name" placeholder="Имя"
+             value="Жак-Ив Кусто">
+      <input type="text" class="popup__input"
+             name="profile-caption" id="profile-caption" placeholder="Подпись"
+             value="Исследователь океана">
     </fieldset>
-    <a href="#" class="button popup__close-btn"></a>
     <input type="submit" class="button popup__submit-btn" value="Сохранить">
+    <button class="button popup__close-btn"></button>
   </form>
 </div>
 

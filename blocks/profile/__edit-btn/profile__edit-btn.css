@@ -1,11 +1,12 @@
 .profile__edit-btn {
   width: 24px;
   height: 24px;
-  background: #000 url("../../../images/edit-icon.svg") center center no-repeat;
+  /*padding: 7px;*/
+  padding: 0;
+  margin-left: 18px;
+  background: url("../../../images/edit-icon.svg") center center no-repeat;
   background-size: 10px 10px;
   border: 1px solid #FFF;
   border-radius: 0;
   color: #FFF;
-  grid-area: profile-edit-btn;
-  margin-left: 18px;
 }
