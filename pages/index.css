@@ -23,3 +23,11 @@
 @import "../blocks/profile/__name/profile__name.css";
 @import "../blocks/profile/__caption/profile__caption.css";
 
+@import "../blocks/elements/elements.css";
+@import "../blocks/element/element.css";
+@import "../blocks/element/__image/element__image.css";
+@import "../blocks/element/__panel/element__panel.css";
+@import "../blocks/element/__like-btn/element__like-btn.css";
+@import "../blocks/element/__like-btn/_active/element__like-btn_active.css";
+@import "../blocks/element/__heading/element__heading.css";
+@import "../blocks/element/__image-container/element__image-container.css";
