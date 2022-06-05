@@ -19,11 +19,11 @@
       <img class="profile__avatar" src="./images/profile-avatar.jpg" alt="Жак-Ив Кусто. Исследователь океана.">
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто
-          <a title="Редактировать профиль" href="#" class="button profile__edit-btn"></a>
+          <button type="button" title="Редактировать профиль" class="button profile__edit-btn"></button>
         </h1>
         <p class="profile__caption">Исследователь океана</p>
       </div>
-      <a href="#" title="Добавить новый пост" class="button profile__add-btn"></a>
+      <button type="button" title="Добавить новый пост" class="button profile__add-btn"></button>
     </section>
     <section class="elements">
 
@@ -96,8 +96,8 @@
 </div>
 
 <div class="popup">
-  <form action="#" class="popup__container">
-    <p class="popup__heading">Редактировать профиль</p>
+  <form action="#" name="editProfileForm" class="popup__container">
+    <h2 class="popup__heading">Редактировать профиль</h2>
     <fieldset class="popup__fieldset">
       <input type="text" class="popup__input"
              name="profile-name" id="profile-name" placeholder="Имя"
@@ -107,7 +107,7 @@
              value="Исследователь океана">
     </fieldset>
     <button type="submit" class="button popup__submit-btn">Сохранить</button>
-    <a href="#" title="Закрыть окно" class="button popup__close-btn"></a>
+    <button type="button" title="Закрыть окно" class="button popup__close-btn"></button>
   </form>
 </div>
 
