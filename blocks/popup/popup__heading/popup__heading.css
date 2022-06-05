@@ -5,3 +5,9 @@
   font-weight: 900;
   line-height: 1.2;
 }
+
+@media screen and (max-width: 720px) {
+  .popup__heading {
+    font-size: 18px;
+  }
+}

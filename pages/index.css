@@ -1,11 +1,15 @@
 @import "../vendor/normalize.css";
+
 @import "../fonts/fonts.css";
 
+@import "../blocks/variables.css";
+
 @import "../blocks/page/page.css";
-@import "../blocks/layout/layout.css";
-@import "../blocks/content/content.css";
+
+@import "../blocks/site-layout/site-layout.css";
+@import "../blocks/content-layout/content-layout.css";
+
 @import "../blocks/button/button.css";
-@import "../blocks/inner-container/inner-container.css";
 
 @import "../blocks/popup/popup.css";
 @import "../blocks/popup/popup__input/popup__input.css";

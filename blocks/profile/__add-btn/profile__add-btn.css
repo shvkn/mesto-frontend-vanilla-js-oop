@@ -1,14 +1,19 @@
 .profile__add-btn {
   width: 150px;
   border: 2px solid #FFF;
-  background: #000 url("../../../images/plus-icon.svg") center center no-repeat;
+  background: #000 url("../../../images/icon-plus.svg") center center no-repeat;
   background-size: 22px;
   margin-left: auto;
+}
+
+.profile__add-btn:hover {
+  opacity: .6;
 }
 
 @media screen and (max-width: 720px) {
   .profile__add-btn {
     width: 100%;
     margin-top: 36px;
+    background-size: 16px;
   }
 }

@@ -3,99 +3,94 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no,
+        initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="./pages/index.css" rel="stylesheet">
   <title>Mesto</title>
 </head>
 <body class="page">
-<div class="layout">
+<div class="site-layout">
   <header class="header">
-    <div class="inner-container">
-      <img class="header__logo" src="./images/mesto-logo.svg" alt="Mesto Russia.">
-    </div>
+    <img class="header__logo" src="./images/mesto-logo.svg" alt="Mesto Russia.">
   </header>
-  <main class="content inner-container">
-    <div class="profile">
-      <img src="./images/profile-avatar.jpg" alt="Жак-Ив Кусто. Исследователь океана." class="profile__avatar">
+  <main class="content-layout">
+    <section class="profile">
+      <img class="profile__avatar" src="./images/profile-avatar.jpg" alt="Жак-Ив Кусто. Исследователь океана.">
       <div class="profile__info">
-        <h2 class="profile__name">Жак-Ив Кусто<a href="#" class="button profile__edit-btn"></a>
-        </h2>
+        <h1 class="profile__name">Жак-Ив Кусто
+          <a title="Редактировать профиль" href="#" class="button profile__edit-btn"></a>
+        </h1>
         <p class="profile__caption">Исследователь океана</p>
       </div>
-      <a href="#" class="button profile__add-btn"></a>
-    </div>
+      <a href="#" title="Добавить новый пост" class="button profile__add-btn"></a>
+    </section>
     <section class="elements">
       <figure class="element">
         <div class="element__image-container">
-          <img src="./images/elements-elbrus.jpg" alt="Гора Эльбрус на закате." class="element__image">
+          <img class="element__image" src="./images/elements-elbrus.jpg" alt="Гора Эльбрус на закате.">
         </div>
         <figcaption class="element__panel">
           <h2 class="element__heading">Гора Эльбрус</h2>
-          <a href="#" class="button element__like-btn element__like-btn_active"></a>
+          <a href="#" title="Лайкнуть пост" class="button element__like-btn element__like-btn_active"></a>
         </figcaption>
       </figure>
       <figure class="element">
         <div class="element__image-container">
-          <img src="./images/elements-dombai.jpg" alt="Гора Пик Инэ, Домбай." class="element__image">
+          <img class="element__image" src="./images/elements-dombay.jpg" alt="Гора Пик Инэ, Домбай.">
         </div>
         <figcaption class="element__panel">
           <h2 class="element__heading">Домбай</h2>
-          <a href="#" class="button element__like-btn"></a>
+          <a href="#" title="Лайкнуть пост" class="button element__like-btn"></a>
         </figcaption>
       </figure>
       <figure class="element">
         <div class="element__image-container">
-          <img src="./images/elements-karachaevsk.jpg" alt="Древний храм в Карачаево-Черкессии." class="element__image">
+          <img class="element__image" src="./images/elements-karachay.jpg" alt="Древний храм в Карачаево-Черкессии.">
         </div>
         <figcaption class="element__panel">
           <h2 class="element__heading">Карачаево-Черкессия</h2>
-          <a href="#" class="button element__like-btn"></a>
+          <a href="#" title="Лайкнуть пост" class="button element__like-btn"></a>
         </figcaption>
       </figure>
       <figure class="element">
         <div class="element__image-container">
-          <img src="./images/element-altay.jpg" alt="Гейзеровое озеро, Алтай." class="element__image">
+          <img class="element__image" src="./images/elements-altay.jpg" alt="Гейзеровое озеро, Алтай.">
         </div>
         <figcaption class="element__panel">
           <h2 class="element__heading">Алтай</h2>
-          <a href="#" class="button element__like-btn"></a>
+          <a href="#" title="Лайкнуть пост" class="button element__like-btn"></a>
         </figcaption>
       </figure>
       <figure class="element">
         <div class="element__image-container">
-          <img src="./images/elements-sochi.jpg" alt="Яхта на фоне стадиона Фишт, Сочи." class="element__image">
+          <img class="element__image" src="./images/elements-sochi.jpg" alt="Яхта на фоне стадиона Фишт, Сочи.">
         </div>
         <figcaption class="element__panel">
           <h2 class="element__heading">Сочи</h2>
-          <a href="#" class="button element__like-btn"></a>
+          <a href="#" title="Лайкнуть пост" class="button element__like-btn"></a>
         </figcaption>
       </figure>
 
       <figure class="element">
         <div class="element__image-container">
-          <img src="./images/elements-buryatia.jpg" alt="Буддистский дацан, Бурятия." class="element__image">
+          <img class="element__image" src="./images/elements-buratia.jpg" alt="Буддистский дацан, Бурятия.">
         </div>
         <figcaption class="element__panel">
           <h2 class="element__heading">Бурятия</h2>
-          <a href="#" class="button element__like-btn"></a>
+          <a href="#" title="Лайкнуть пост" class="button element__like-btn"></a>
         </figcaption>
       </figure>
     </section>
   </main>
   <footer class="footer">
-    <div class="inner-container">
-      <p class="footer__copyright">
-        &copy;&nbsp;
-        2020 Mesto Russia
-      </p>
-    </div>
+    <p class="footer__copyright">&copy;&nbsp;2022 Mesto Russia</p>
   </footer>
 </div>
 
 <div class="popup">
   <form action="#" class="popup__container">
-    <h2 class="popup__heading">Редактировать профиль</h2>
+    <p class="popup__heading">Редактировать профиль</p>
     <fieldset class="popup__fieldset">
       <input type="text" class="popup__input"
              name="profile-name" id="profile-name" placeholder="Имя"
@@ -104,8 +99,8 @@
              name="profile-caption" id="profile-caption" placeholder="Подпись"
              value="Исследователь океана">
     </fieldset>
-    <input type="submit" class="button popup__submit-btn" value="Сохранить">
-    <button class="button popup__close-btn"></button>
+    <button type="submit" class="button popup__submit-btn">Сохранить</button>
+    <a href="#" title="Закрыть окно" class="button popup__close-btn"></a>
   </form>
 </div>
 

@@ -1,4 +1,4 @@
 .footer {
   grid-row: footer;
-  grid-column: footer-s / footer-e;
+  padding: 0 var(--inner-container-padding);
 }

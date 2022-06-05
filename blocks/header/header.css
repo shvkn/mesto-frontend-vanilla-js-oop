@@ -1,15 +1,13 @@
 .header {
   grid-row: header;
-  grid-column: header-s / header-e;
   height: 74px;
-  /*padding-bottom: 40px;*/
   border-bottom: 1px solid #5a5a5a;
   box-sizing: border-box;
+  padding: 0 var(--inner-container-padding);
 }
 
 @media screen and (max-width: 720px) {
   .header {
     height: 56px;
-    /*padding-bottom: 31px;*/
   }
 }

@@ -1,9 +1,0 @@
-.inner-container {
-  padding: 0;
-}
-
-@media screen and (max-width: 880px) {
-  .inner-container {
-    padding: 0 19px;
-  }
-}

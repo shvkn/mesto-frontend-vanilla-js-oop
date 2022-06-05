@@ -1,0 +1,10 @@
+:root {
+  --inner-container-padding: 0;
+}
+
+@media screen and (max-width: 890px) {
+  :root {
+    --inner-container-padding: 19px;
+  }
+}
+

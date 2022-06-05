@@ -4,3 +4,7 @@
   background: url("../../../images/icon-like.svg") center center no-repeat;
   margin-left: 33px;
 }
+
+.element__like-btn:hover {
+  opacity: .5;
+}
