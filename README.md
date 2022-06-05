@@ -15,7 +15,4 @@
 
 
 ##  Технологии
-<img src="https://img.shields.io/badge/HTML-black?style=flat&logo=html5&logoColor=F24E1E">
-<img src="https://img.shields.io/badge/CSS 3-Responsive : Flex : Grid-90ee90?style=flat&logo=css3">
-<img src="https://img.shields.io/badge/BEM-gold?style=flat&logo=bem&logoColor=black">
-<img src="https://img.shields.io/badge/Figma-F24E1E?style=flat&logo=figma&logoColor=white">
+<img src="https://img.shields.io/badge/HTML-black?style=flat&logo=html5&logoColor=F24E1E"> <img src="https://img.shields.io/badge/CSS 3-Responsive : Flex : Grid-90ee90?style=flat&logo=css3"> <img src="https://img.shields.io/badge/BEM-gold?style=flat&logo=bem&logoColor=black"> <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat&logo=figma&logoColor=white">
