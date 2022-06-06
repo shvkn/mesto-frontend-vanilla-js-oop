@@ -1,9 +1,9 @@
 .header {
   grid-row: header;
   min-height: 74px;
-  border-bottom: 1px solid rgb(90 90 90 / 70%);
-  box-sizing: border-box;
   padding: 0 var(--inner-container-padding);
+  box-sizing: border-box;
+  border-bottom: 1px solid rgb(90 90 90 / 70%);
 }
 
 @media screen and (max-width: 720px) {

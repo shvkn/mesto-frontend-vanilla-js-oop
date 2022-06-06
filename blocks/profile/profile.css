@@ -1,7 +1,7 @@
 .profile {
-  grid-row: profile;
   display: flex;
   align-items: center;
+  grid-row: profile;
 }
 
 @media screen and (max-width: 720px) {

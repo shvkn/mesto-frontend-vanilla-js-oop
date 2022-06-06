@@ -1,9 +1,9 @@
 .profile__add-btn {
   width: 150px;
-  border: 2px solid #FFF;
+  margin-left: auto;
   background: #000 url("../../../images/icon-plus.svg") center center no-repeat;
   background-size: 22px;
-  margin-left: auto;
+  border: 2px solid #FFF;
 }
 
 .profile__add-btn:hover {
