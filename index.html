@@ -12,78 +12,67 @@
 <body class="page">
 <div class="site-layout">
   <header class="header">
-    <img class="header__logo" src="./images/mesto-logo.svg" alt="Mesto Russia.">
+    <img class="header__logo" src="./images/mesto-logo.svg" alt="Проект Место. Россия.">
   </header>
   <main class="content-layout">
     <section class="profile">
       <img class="profile__avatar" src="./images/profile-avatar.jpg" alt="Жак-Ив Кусто. Исследователь океана.">
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто
-          <button type="button" title="Редактировать профиль" class="button profile__edit-btn"></button>
+          <button type="button" aria-label="Редактировать профиль" class="button profile__edit-btn"></button>
         </h1>
         <p class="profile__caption">Исследователь океана</p>
       </div>
-      <button type="button" title="Добавить новый пост" class="button profile__add-btn"></button>
+      <button type="button" aria-label="Добавить новый пост" class="button profile__add-btn"></button>
     </section>
     <section class="elements">
 
       <figure class="element">
-        <img class="element__image"
-             src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-             style="background-image: url('./images/elements-elbrus.jpg');" alt="Гора Эльбрус на закате.">
+        <img class="element__image" src="./images/elements-elbrus.jpg" alt="Гора Эльбрус на закате.">
         <figcaption class="element__panel">
           <h2 class="element__heading">Гора Эльбрус</h2>
-          <button type="button" title="Лайкнуть пост" class="button element__like-btn element__like-btn_active"></button>
+          <button type="button" aria-label="Лайкнуть пост"
+                  class="button element__like-btn element__like-btn_active"></button>
         </figcaption>
       </figure>
 
       <figure class="element">
-        <img class="element__image"
-             src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-             style="background-image: url('./images/elements-dombay.jpg');" alt="Гора Пик Инэ, Домбай.">
+        <img class="element__image" src="./images/elements-dombay.jpg" alt="Гора Пик Инэ, Домбай.">
         <figcaption class="element__panel">
           <h2 class="element__heading">Домбай</h2>
-          <button type="button" title="Лайкнуть пост" class="button element__like-btn"></button>
+          <button type="button" aria-label="Лайкнуть пост" class="button element__like-btn"></button>
         </figcaption>
       </figure>
 
       <figure class="element">
-        <img class="element__image"
-             src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-             style="background-image: url('./images/elements-karachay.jpg');" alt="Древний храм в Карачаево-Черкессии.">
+        <img class="element__image" src="./images/elements-karachay.jpg" alt="Древний храм в Карачаево-Черкессии.">
         <figcaption class="element__panel">
           <h2 class="element__heading">Карачаево-Черкессия</h2>
-          <button type="button" title="Лайкнуть пост" class="button element__like-btn"></button>
+          <button type="button" aria-label="Лайкнуть пост" class="button element__like-btn"></button>
         </figcaption>
       </figure>
 
       <figure class="element">
-        <img class="element__image"
-             src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-             style="background-image: url('./images/elements-altay.jpg');" alt="Бирбзовая Катунь, Алтай.">
+        <img class="element__image" src="./images/elements-altay.jpg" alt="Бирбзовая Катунь, Алтай.">
         <figcaption class="element__panel">
           <h2 class="element__heading">Алтай</h2>
-          <button type="button" title="Лайкнуть пост" class="button element__like-btn"></button>
+          <button type="button" aria-label="Лайкнуть пост" class="button element__like-btn"></button>
         </figcaption>
       </figure>
 
       <figure class="element">
-        <img class="element__image"
-             src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-             style="background-image: url('./images/elements-sochi.jpg');" alt="Пирс, Сочи.">
+        <img class="element__image" src="./images/elements-sochi.jpg" alt="Пирс, Сочи.">
         <figcaption class="element__panel">
           <h2 class="element__heading">Сочи</h2>
-          <button type="button" title="Лайкнуть пост" class="button element__like-btn"></button>
+          <button type="button" aria-label="Лайкнуть пост" class="button element__like-btn"></button>
         </figcaption>
       </figure>
 
       <figure class="element">
-        <img class="element__image"
-             src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-             style="background-image: url('./images/elements-buratia.jpg');" alt="Буддистский дацан, Бурятия.">
+        <img class="element__image" src="./images/elements-buratia.jpg" alt="Буддистский дацан, Бурятия.">
         <figcaption class="element__panel">
           <h2 class="element__heading">Бурятия</h2>
-          <button type="button" title="Лайкнуть пост" class="button element__like-btn"></button>
+          <button type="button" aria-label="Лайкнуть пост" class="button element__like-btn"></button>
         </figcaption>
       </figure>
 
@@ -100,14 +89,14 @@
     <h2 class="popup__heading">Редактировать профиль</h2>
     <fieldset class="popup__fieldset">
       <input type="text" class="popup__input"
-             name="profile-name" id="profile-name" placeholder="Имя"
+             name="profile-name" id="profile-name" placeholder="Имя" aria-label="Имя"
              value="Жак-Ив Кусто">
       <input type="text" class="popup__input"
-             name="profile-caption" id="profile-caption" placeholder="Подпись"
+             name="profile-caption" id="profile-caption" placeholder="Подпись" aria-label="Подпись"
              value="Исследователь океана">
     </fieldset>
-    <button type="submit" class="button popup__submit-btn">Сохранить</button>
-    <button type="button" title="Закрыть окно" class="button popup__close-btn"></button>
+    <button type="submit" aria-label="Сохранить изменения" class="button popup__submit-btn">Сохранить</button>
+    <button type="button" aria-label="Закрыть окно" class="button popup__close-btn"></button>
   </form>
 </div>
 
