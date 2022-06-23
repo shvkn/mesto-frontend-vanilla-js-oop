@@ -31,13 +31,13 @@
 @import "../blocks/profile/__name/profile__name.css";
 @import "../blocks/profile/__caption/profile__caption.css";
 
-@import "../blocks/elements/elements.css";
-@import "../blocks/element/element.css";
-@import "../blocks/element/__image/element__image.css";
-@import "../blocks/element/__panel/element__panel.css";
-@import "../blocks/element/__like-btn/element__like-btn.css";
-@import "../blocks/element/__like-btn/_active/element__like-btn_active.css";
-@import "../blocks/element/__heading/element__heading.css";
+@import "../blocks/places/places.css";
+@import "../blocks/place/place.css";
+@import "../blocks/place/__image/place__image.css";
+@import "../blocks/place/__panel/place__panel.css";
+@import "../blocks/place/__like-btn/place__like-btn.css";
+@import "../blocks/place/__like-btn/_active/place__like-btn_active.css";
+@import "../blocks/place/__heading/place__heading.css";
 
 @import "../blocks/footer/footer.css";
 @import "../blocks/footer/__copyright/footer__copyright.css";
