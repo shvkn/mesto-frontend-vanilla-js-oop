@@ -9,6 +9,12 @@ const data = {
 const editProfilePopup = document.querySelector('#edit-profile-popup');
 const profile = document.querySelector('.profile');
 
+const renderProfile = () => {
+  profile.querySelector('.profile__name').textContent = data.profile.name;
+  profile.querySelector('.profile__caption').textContent = data.profile.caption;
+  profile.querySelector('.profile__avatar').src = data.profile.avatar;
+};
+
 const openPopup = (popupId) => {
   document.querySelector(popupId).classList.add('popup_opened');
 };
@@ -21,6 +27,7 @@ const setProfileData = (name, caption, avatar = 'images/profile-avatar.jpg') => 
   data.profile.name = name;
   data.profile.caption = caption;
   data.profile.avatar = avatar;
+  renderProfile();
 };
 
 const renderEditPopupData = () => {
@@ -42,3 +49,5 @@ editProfilePopup.querySelector('.popup__submit-btn').addEventListener('click', (
   setProfileData(name.value, caption.value);
   closePopup(e);
 });
+
+renderProfile();
