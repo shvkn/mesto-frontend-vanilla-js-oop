@@ -1,9 +1,9 @@
 .profile__edit-btn {
-  display: inline-block;
+  grid-area: profile-edit-button;
   width: 24px;
   height: 24px;
   padding: 0;
-  margin-left: 18px;
+  margin: 0;
   background: url("../../../images/icon-edit-btn.svg") center center no-repeat;
   background-size: cover;
   border-radius: 0;
@@ -17,6 +17,5 @@
   .profile__edit-btn {
     width: 18px;
     height: 18px;
-    margin-left: 10px;
   }
 }
