@@ -2,10 +2,13 @@
   position: fixed;
   top: 0;
   left: 0;
-  display: none;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
   width: 100vw;
   height: 100vh;
   padding: 0 var(--inner-container-padding);
   box-sizing: border-box;
   background-color: rgb(0 0 0 / 50%);
+  transition: all .4s ease-in-out;
 }
