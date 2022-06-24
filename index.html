@@ -61,6 +61,24 @@
     <button type="button" aria-label="Закрыть окно" class="button popup__close-btn"></button>
   </form>
 </div>
+
+<div class="popup" id="add-new-place-popup">
+  <form action="#" name="addNewPlaceForm" class="popup__container">
+    <h2 class="popup__heading">Добавить место</h2>
+    <fieldset class="popup__fieldset">
+      <input type="text" class="popup__input"
+             name="new-place-heading" id="new-place-heading" placeholder="Название места" aria-label="Название места"
+             value="">
+      <input type="file" class="popup__input" accept="image/jpeg, image/jpg, image/png"
+             name="new-place-image" id="new-place-image" >
+      <textarea type="text" class="popup__input"
+                name="new-place-image-desc" id="new-place-image-desc" placeholder="some text" aria-label="Описание изоражения" value=""></textarea>
+    </fieldset>
+    <button type="submit" aria-label="Добавить место" class="button popup__submit-btn">Добавить</button>
+    <button type="button" aria-label="Закрыть окно" class="button popup__close-btn"></button>
+  </form>
+</div>
+
 <script src="pages/index.js"></script>
 </body>
 </html>
