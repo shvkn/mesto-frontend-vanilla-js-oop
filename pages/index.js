@@ -33,9 +33,24 @@ const data = {
   ],
 };
 
-const editProfilePopup = document.querySelector('#edit-profile-popup');
+const popupProfile = document.querySelector('#popup-edit-profile');
+const popupImage = document.querySelector('#popup-image');
+const popupNewPlace = document.querySelector('#popup-add-new-place');
+
 const profile = document.querySelector('.profile');
 const placesContainer = document.querySelector('.places');
+
+const openPopup = (popup) => {
+  popup.classList.add('popup_opened');
+};
+
+const closePopup = (e) => {
+  e.target.closest('.popup').classList.remove('popup_opened');
+};
+
+document.querySelectorAll('.popup__close-btn').forEach(
+  (popup) => popup.addEventListener('click', closePopup),
+);
 
 const renderProfile = () => {
   profile.querySelector('.profile__name').textContent = data.profile.name;
@@ -43,17 +58,7 @@ const renderProfile = () => {
   profile.querySelector('.profile__avatar').src = data.profile.avatar;
 };
 
-const openPopup = (popupId) => {
-  document.querySelector(popupId).classList.add('popup_opened');
-};
-
-const closePopup = (e) => {
-  e.target.closest('.popup').classList.remove('popup_opened');
-};
-
-document.querySelectorAll('.popup__close-btn').forEach((popup) => popup.addEventListener('click', (e) => closePopup(e)));
-
-const setProfileData = (name, caption, avatar = 'images/profile-avatar.jpg') => {
+const setProfileData = (name, caption, avatar = './images/profile-avatar.jpg') => {
   data.profile.name = name;
   data.profile.caption = caption;
   data.profile.avatar = avatar;
@@ -61,23 +66,23 @@ const setProfileData = (name, caption, avatar = 'images/profile-avatar.jpg') => 
 };
 
 const renderEditPopupData = () => {
-  editProfilePopup.querySelector('input[name=profile-name]').value = data.profile.name;
-  editProfilePopup.querySelector('input[name=profile-caption]').value = data.profile.caption;
+  popupProfile.querySelector('input[name=profile-name]').value = data.profile.name;
+  popupProfile.querySelector('input[name=profile-caption]').value = data.profile.caption;
 };
 
 profile.querySelector('.profile__edit-btn').addEventListener('click', () => {
   renderEditPopupData();
-  openPopup('#edit-profile-popup');
+  openPopup(popupProfile);
 });
 
-document.querySelector('.profile__add-btn').addEventListener('click', (e) => {
-  openPopup('#add-new-place-popup');
+document.querySelector('.profile__add-btn').addEventListener('click', () => {
+  openPopup(popupNewPlace);
 });
 
-editProfilePopup.querySelector('.popup__submit-btn').addEventListener('click', (e) => {
+popupProfile.querySelector('.popup__submit-btn').addEventListener('click', (e) => {
   e.preventDefault();
-  const name = editProfilePopup.querySelector('input[name=profile-name]');
-  const caption = editProfilePopup.querySelector('input[name=profile-caption]');
+  const name = popupProfile.querySelector('input[name=profile-name]');
+  const caption = popupProfile.querySelector('input[name=profile-caption]');
   setProfileData(name.value, caption.value);
   closePopup(e);
 });
@@ -90,6 +95,13 @@ const removeThisPlace = (e) => {
   e.target.closest('.place').remove();
 };
 
+const openImagePopup = (e) => {
+  const heading = e.target.closest('.place').querySelector('.place__heading').textContent;
+  popupImage.querySelector('.popup__cover-image').src = e.target.src;
+  popupImage.querySelector('.popup__heading').textContent = heading;
+  openPopup(popupImage);
+};
+
 const createPlaceNode = (name, link) => {
   const placeTemplate = document.querySelector('#place-template').content;
   const place = placeTemplate.querySelector('.place').cloneNode(true);
@@ -98,6 +110,7 @@ const createPlaceNode = (name, link) => {
   place.querySelector('.place__heading').textContent = name;
   place.querySelector('.place__like-btn').addEventListener('click', likeThisPlace);
   place.querySelector('.place__remove-btn').addEventListener('click', removeThisPlace);
+  place.querySelector('.place__image').addEventListener('click', openImagePopup);
 
   return place;
 };
