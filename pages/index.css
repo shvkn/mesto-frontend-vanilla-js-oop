@@ -38,6 +38,8 @@
 @import "../blocks/place/__like-btn/place__like-btn.css";
 @import "../blocks/place/__like-btn/_active/place__like-btn_active.css";
 @import "../blocks/place/__heading/place__heading.css";
+@import "../blocks/place/__remove-btn/place__remove-btn.css";
 
 @import "../blocks/footer/footer.css";
 @import "../blocks/footer/__copyright/footer__copyright.css";
+

@@ -7,40 +7,28 @@ const data = {
 
   places: [
     {
-      id: 1,
-      heading: 'Гора Эльбрус',
-      img: { src: './images/elements-elbrus.jpg', alt: 'Гора Эльбрус на закате.' },
-      liked: true,
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
     },
     {
-      id: 2,
-      heading: 'Домбай',
-      img: { src: './images/elements-dombay.jpg', alt: 'Гора Пик Инэ, Домбай.' },
-      liked: false,
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
     },
     {
-      id: 3,
-      heading: 'Карачаево-Черкессия',
-      img: { src: './images/elements-karachay.jpg', alt: 'Древний храм в Карачаево-Черкессии.' },
-      liked: true,
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
     },
     {
-      id: 4,
-      heading: 'Алтай',
-      img: { src: './images/elements-altay.jpg', alt: 'Бирбзовая Катунь, Алтай.' },
-      liked: false,
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
     },
     {
-      id: 5,
-      heading: 'Бурятия',
-      img: { src: './images/elements-buratia.jpg', alt: 'Буддистский дацан, Бурятия.' },
-      liked: false,
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
     },
     {
-      id: 6,
-      heading: 'Сочи',
-      img: { src: './images/elements-sochi.jpg', alt: 'Пирс, Сочи.' },
-      liked: false,
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
     },
   ],
 };
@@ -94,52 +82,31 @@ editProfilePopup.querySelector('.popup__submit-btn').addEventListener('click', (
   closePopup(e);
 });
 
-const likeThisPlace = (placeId, e) => {
-  const place = data.places.find((placeObj) => placeObj.id === placeId);
-  place.liked = e.target.classList.toggle('place__like-btn_active');
+const likeThisPlace = (e) => {
+  e.target.classList.toggle('place__like-btn_active');
 };
 
-const addNewPlace = (placeId, imageLink, imageDesc, heading, liked = false) => {
+const createPlaceNode = (name, link) => {
   const placeTemplate = document.querySelector('#place-template').content;
   const place = placeTemplate.querySelector('.place').cloneNode(true);
 
-  const likeButton = place.querySelector('.place__like-btn');
-  likeButton.addEventListener('click', (e) => likeThisPlace(placeId, e));
-  if (liked) {
-    likeButton.classList.add('place__like-btn_active');
-  }
+  place.querySelector('.place__image').src = link;
+  place.querySelector('.place__heading').textContent = name;
+  place.querySelector('.place__like-btn').addEventListener('click', likeThisPlace);
 
-  place.querySelector('.place__image').src = imageLink;
-  place.querySelector('.place__image').alt = imageDesc;
-  place.querySelector('.place__heading').textContent = heading;
+  return place;
+};
 
+const insertPlaceInContainer = (place) => {
   placesContainer.prepend(place);
 };
 
-const renderPlaces = () => data.places.forEach((placeObj) => addNewPlace(
-  placeObj.id,
-  placeObj.img.src,
-  placeObj.img.desc,
-  placeObj.heading,
-  placeObj.liked,
-));
-
-const addNewPlacePopup = document.querySelector('#add-new-place-popup');
-
-const loadFile = (inputSelector) => {
-  const file = addNewPlacePopup.querySelector(inputSelector).files[0];
-  const reader = new FileReader();
-  let r;
-  const result = (a) => a;
-
-  reader.addEventListener('loadend', () => r = reader.result);
-  reader.readAsDataURL(file);
-  return r;
+const renderPlaces = () => {
+  data.places.forEach((placeObj) => {
+    const placeNode = createPlaceNode(placeObj.name, placeObj.link);
+    insertPlaceInContainer(placeNode);
+  });
 };
-addNewPlacePopup.querySelector('.popup__submit-btn').addEventListener('click', (e) => {
-  e.preventDefault();
-  console.log(loadFile('#new-place-image'));
-});
 
 renderProfile();
 renderPlaces();
