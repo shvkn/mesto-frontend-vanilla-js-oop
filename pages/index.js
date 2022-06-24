@@ -86,6 +86,10 @@ const likeThisPlace = (e) => {
   e.target.classList.toggle('place__like-btn_active');
 };
 
+const removeThisPlace = (e) => {
+  e.target.closest('.place').remove();
+};
+
 const createPlaceNode = (name, link) => {
   const placeTemplate = document.querySelector('#place-template').content;
   const place = placeTemplate.querySelector('.place').cloneNode(true);
@@ -93,6 +97,7 @@ const createPlaceNode = (name, link) => {
   place.querySelector('.place__image').src = link;
   place.querySelector('.place__heading').textContent = name;
   place.querySelector('.place__like-btn').addEventListener('click', likeThisPlace);
+  place.querySelector('.place__remove-btn').addEventListener('click', removeThisPlace);
 
   return place;
 };
