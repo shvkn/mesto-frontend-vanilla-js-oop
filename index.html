@@ -46,34 +46,35 @@
   </footer>
 </div>
 
-<div class="popup" id="popup-edit-profile">
-  <form action="#" name="editProfileForm" class="popup__container">
+<div class="popup" id="popup-profile">
+  <form action="#" name="form-profile" id="form-profile" class="popup__container">
     <h2 class="popup__heading">Редактировать профиль</h2>
     <fieldset class="popup__fieldset">
       <input type="text" class="popup__input"
              name="profile-name" id="profile-name" placeholder="Имя" aria-label="Имя"
-             value="">
+             required>
       <input type="text" class="popup__input"
              name="profile-caption" id="profile-caption" placeholder="Подпись" aria-label="Подпись"
-             value="">
+             required>
     </fieldset>
     <button type="submit" aria-label="Сохранить изменения" class="button popup__submit-btn">Сохранить</button>
-    <button type="button" aria-label="Закрыть окно" class="button popup__close-btn"></button>
+    <button type="reset" aria-label="Закрыть окно" class="button popup__close-btn"></button>
   </form>
 </div>
 
-<div class="popup" id="popup-add-new-place">
-  <form action="#" name="addNewPlaceForm" class="popup__container">
-    <h2 class="popup__heading">Добавить место</h2>
+<div class="popup" id="popup-new-place">
+  <form action="#" name="form-new-place" id="form-new-place" class="popup__container">
+    <h2 class="popup__heading">Новое место</h2>
     <fieldset class="popup__fieldset">
       <input type="text" class="popup__input"
              name="new-place-heading" id="new-place-heading" placeholder="Название места" aria-label="Введите название места"
-             value="">
-      <input type="text" class="popup__input"
-             name="new-place-link" id="new-place-link" placeholder="Ссылка на изображение" aria-label="Введите ссылку на изображение" value="">
+             required>
+      <input type="url" class="popup__input"
+             name="new-place-link" id="new-place-link" placeholder="Ссылка на картинку" aria-label="Введите ссылку на картинку"
+             required>
     </fieldset>
-    <button type="submit" aria-label="Добавить место" class="button popup__submit-btn">Добавить</button>
-    <button type="button" aria-label="Закрыть окно" class="button popup__close-btn"></button>
+    <button type="submit" aria-label="Добавить место" class="button popup__submit-btn">Сохранить</button>
+    <button type="reset" aria-label="Закрыть окно" class="button popup__close-btn"></button>
   </form>
 </div>
 
