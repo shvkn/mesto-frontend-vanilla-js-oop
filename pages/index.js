@@ -47,11 +47,11 @@ const setProfileData = (name, caption, avatar = './images/profile-avatar.jpg') =
   renderProfile();
 };
 
-const likeThisPlace = (e) => {
+const toggleLike = (e) => {
   e.target.classList.toggle('place__like-btn_active');
 };
 
-const removeThisPlace = (e) => {
+const removePlace = (e) => {
   e.target.closest('.place').remove();
 };
 
@@ -69,8 +69,8 @@ const createPlaceNode = (name, link) => {
   place.querySelector('.place__image').src = link;
   place.querySelector('.place__image').alt = name;
   place.querySelector('.place__heading').textContent = name;
-  place.querySelector('.place__like-btn').addEventListener('click', likeThisPlace);
-  place.querySelector('.place__remove-btn').addEventListener('click', removeThisPlace);
+  place.querySelector('.place__like-btn').addEventListener('click', toggleLike);
+  place.querySelector('.place__remove-btn').addEventListener('click', removePlace);
   place.querySelector('.place__image').addEventListener('click', openImagePopup);
 
   return place;
