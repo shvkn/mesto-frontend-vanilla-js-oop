@@ -126,5 +126,17 @@ const renderPlaces = () => {
   });
 };
 
-renderProfile();
-renderPlaces();
+popupNewPlace.querySelector('.popup__submit-btn').addEventListener('click', (e) => {
+  e.preventDefault();
+  const heading = popupNewPlace.querySelector('#new-place-heading').value;
+  const link = popupNewPlace.querySelector('#new-place-link').value;
+  const placeNode = createPlaceNode(heading, link);
+  insertPlaceInContainer(placeNode);
+});
+
+const loadPage = () => {
+  renderProfile();
+  renderPlaces();
+};
+
+loadPage();

@@ -67,12 +67,10 @@
     <h2 class="popup__heading">Добавить место</h2>
     <fieldset class="popup__fieldset">
       <input type="text" class="popup__input"
-             name="new-place-heading" id="new-place-heading" placeholder="Название места" aria-label="Название места"
+             name="new-place-heading" id="new-place-heading" placeholder="Название места" aria-label="Введите название места"
              value="">
-      <input type="file" class="popup__input" accept="image/jpeg, image/jpg, image/png"
-             name="new-place-image" id="new-place-image" >
-      <textarea type="text" class="popup__input"
-                name="new-place-image-desc" id="new-place-image-desc" placeholder="some text" aria-label="Описание изоражения" value=""></textarea>
+      <input type="text" class="popup__input"
+             name="new-place-link" id="new-place-link" placeholder="Ссылка на изображение" aria-label="Введите ссылку на изображение" value="">
     </fieldset>
     <button type="submit" aria-label="Добавить место" class="button popup__submit-btn">Добавить</button>
     <button type="button" aria-label="Закрыть окно" class="button popup__close-btn"></button>
