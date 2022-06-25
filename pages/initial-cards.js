@@ -1,4 +1,4 @@
-export const data = {
+const data = {
   profile: {
     name: 'Жак-Ив Кусто',
     caption: 'Исследователь океана',
