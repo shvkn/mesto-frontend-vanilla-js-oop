@@ -47,3 +47,5 @@
 @import "../blocks/popup/__container/_type/popup__container_type_image.css";
 @import "../blocks/popup/__cover-image/popup__cover-image.css";
 @import "../blocks/popup/__heading/_type/popup__heading_type_image.css";
+
+@import "../blocks/hide-overflow/hide-overflow.css";

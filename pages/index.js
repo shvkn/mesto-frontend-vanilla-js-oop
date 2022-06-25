@@ -48,9 +48,17 @@ const formProfile = popupProfile.querySelector('#form-profile');
 const formNewPlace = popupNewPlace.querySelector('#form-new-place');
 
 const placesContainer = document.querySelector('.places');
+const page = document.querySelector('.page');
 
-const openPopup = (popup) => popup.classList.add('popup_opened');
-const closePopup = (e) => e.target.closest('.popup').classList.remove('popup_opened');
+const openPopup = (popup) => {
+  page.classList.add('hide-overflow');
+  popup.classList.add('popup_opened');
+};
+
+const closePopup = (e) => {
+  page.classList.remove('hide-overflow');
+  e.target.closest('.popup').classList.remove('popup_opened');
+};
 
 const renderProfile = () => {
   profile.querySelector('.profile__name').textContent = data.profile.name;
