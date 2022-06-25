@@ -65,9 +65,9 @@ const openImagePopup = (e) => {
 
 const createPlaceNode = (name, link) => {
   const place = placeTemplate.content.querySelector('.place').cloneNode(true);
-
-  place.querySelector('.place__image').src = link;
-  place.querySelector('.place__image').alt = name;
+  const placeImage = place.querySelector('.place__image');
+  placeImage.src = link;
+  placeImage.alt = name;
   place.querySelector('.place__heading').textContent = name;
   place.querySelector('.place__like-btn').addEventListener('click', toggleLike);
   place.querySelector('.place__remove-btn').addEventListener('click', removePlace);
