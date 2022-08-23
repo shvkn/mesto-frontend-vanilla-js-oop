@@ -1,3 +1,5 @@
+import { data } from './initial-cards';
+
 const page = document.querySelector('.page');
 const placesContainer = document.querySelector('.places');
 const placeTemplate = document.querySelector('#place-template');

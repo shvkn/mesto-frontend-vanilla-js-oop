@@ -1,8 +1,8 @@
-const data = {
+export const data = {
   profile: {
     name: 'Жак-Ив Кусто',
     caption: 'Исследователь океана',
-    avatar: './images/profile-avatar.jpg',
+    avatar: new URL('../images/profile-avatar.jpg', import.meta.url),
   },
 
   places: [
