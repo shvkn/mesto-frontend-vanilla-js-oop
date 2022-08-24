@@ -1,3 +1,6 @@
 import './pages/index.css';
-import './scripts/index';
-import './scripts/initial-cards';
+import './components/data';
+import './components/card';
+import './components/modal';
+import './components/utils';
+import './components/profile';

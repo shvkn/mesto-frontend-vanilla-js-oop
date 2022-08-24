@@ -1,0 +1,17 @@
+.modal__container {
+  position: relative;
+  width: 430px;
+  padding: 34px 36px 37px;
+  margin: auto;
+  box-shadow: 0 0 25px rgb(0 0 0 / 15%);
+  background-color: #fff;
+  border-radius: 10px;
+  color: #000;
+  cursor: auto;
+}
+
+@media screen and (max-width: 720px) {
+  .modal__container {
+    padding: 25px 22px;
+  }
+}
