@@ -1,0 +1,5 @@
+.modal__cover-image {
+  max-width: inherit;
+  max-height: inherit;
+  display: block;
+}

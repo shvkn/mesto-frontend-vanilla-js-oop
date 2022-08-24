@@ -11,14 +11,14 @@
 
 @import "../blocks/button/button.css";
 
-@import "../blocks/popup/popup.css";
-@import "../blocks/popup/__input/popup__input.css";
-@import "../blocks/popup/__container/popup__container.css";
-@import "../blocks/popup/__fieldset/popup__fieldset.css";
-@import "../blocks/popup/__heading/popup__heading.css";
-@import "../blocks/popup/__close-btn/popup__close-btn.css";
-@import "../blocks/popup/__submit-btn/popup__submit-btn.css";
-@import "../blocks/popup/_opened/popup_opened.css";
+@import "../blocks/modal/modal.css";
+@import "../blocks/modal/__input/modal__input.css";
+@import "../blocks/modal/__container/modal__container.css";
+@import "../blocks/modal/__fieldset/modal__fieldset.css";
+@import "../blocks/modal/__heading/modal__heading.css";
+@import "../blocks/modal/__close-btn/modal__close-btn.css";
+@import "../blocks/modal/__submit-btn/modal__submit-btn.css";
+@import "../blocks/modal/_opened/modal_opened.css";
 
 @import "../blocks/header/header.css";
 @import "../blocks/header/__logo/header__logo.css";
@@ -43,9 +43,9 @@
 @import "../blocks/footer/footer.css";
 @import "../blocks/footer/__copyright/footer__copyright.css";
 
-@import "../blocks/popup/_type/popup_type_image.css";
-@import "../blocks/popup/__container/_type/popup__container_type_image.css";
-@import "../blocks/popup/__cover-image/popup__cover-image.css";
-@import "../blocks/popup/__heading/_type/popup__heading_type_image.css";
+@import "../blocks/modal/_type/popup_type_image.css";
+@import "../blocks/modal/__container/_type/modal__container_type_image.css";
+@import "../blocks/modal/__cover-image/modal__cover-image.css";
+@import "../blocks/modal/__heading/_type/modal__heading_type_image.css";
 
 @import "../blocks/hide-overflow/hide-overflow.css";
