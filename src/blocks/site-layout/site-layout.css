@@ -1,0 +1,13 @@
+.site-layout {
+  display: grid;
+  grid-template-rows: 55px [header] auto 40px [content] auto 66px [footer] auto 60px;
+  max-width: 880px;
+  min-width: 320px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 720px) {
+  .site-layout {
+    grid-template-rows: 28px [header] auto 42px [content] auto 48px [footer] auto 36px;
+  }
+}
