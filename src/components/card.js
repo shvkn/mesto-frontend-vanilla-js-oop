@@ -22,7 +22,7 @@ export const createCardNode = (heading, imageLink) => {
   const cardImage = card.querySelector('.card__image');
   const cardHeading = card.querySelector('.card__heading');
   const cardLikeButton = card.querySelector('.card__like-btn');
-  const cardRemoveButton = card.querySelector('.card__remove-btn');
+  const cardRemoveButton = card.querySelector('.card__remove-button');
 
   cardImage.src = imageLink;
   cardImage.alt = heading;

@@ -4,3 +4,4 @@ import './components/card';
 import './components/modal';
 import './components/utils';
 import './components/profile';
+import './components/validation';

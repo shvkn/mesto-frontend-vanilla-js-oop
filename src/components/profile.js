@@ -1,4 +1,3 @@
-import { data } from './data';
 import {
   profileFormCaptionEl,
   profileFormNameEl, modalNewCardEl,
@@ -6,29 +5,18 @@ import {
 } from './index';
 import { closeModal, openModal } from './modal';
 import { setProfileData } from './utils';
+import { avatarLink } from './data';
 
-const profileFormSubmitHandler = (e) => {
+export const profileFormSubmitHandler = (e) => {
   e.preventDefault();
-  setProfileData(profileFormNameEl.value, profileFormCaptionEl.value, '');
-  closeModal(modalProfileEl);
+  setProfileData(profileFormNameEl.value, profileFormCaptionEl.value, avatarLink);
+  closeModal(e);
 };
 
-const fillProfileForm = () => {
-  profileFormNameEl.value = data.profile.name;
-  profileFormCaptionEl.value = data.profile.caption;
-};
-
-const profileEditButtonHandler = () => {
-  fillProfileForm();
+export const profileEditButtonHandler = () => {
   openModal(modalProfileEl);
 };
 
-const profileAddCardButtonHandler = () => {
+export const profileAddCardButtonHandler = () => {
   openModal(modalNewCardEl);
-};
-
-export {
-  profileFormSubmitHandler,
-  profileEditButtonHandler,
-  profileAddCardButtonHandler,
 };

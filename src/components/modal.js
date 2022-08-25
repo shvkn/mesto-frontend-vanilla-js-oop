@@ -6,8 +6,8 @@ const enablePageScroll = () => pageEl.classList.remove('hide-overflow');
 const openedModals = [];
 const hasOpenedModals = () => openedModals.length > 0;
 
-const closeModal = (e) => {
-  if (e.key === 'Escape' || e.target.matches('.modal') || e.target.matches('.modal__close-btn')) {
+export const closeModal = (e) => {
+  if (e.key === 'Escape' || e.target.matches('.modal') || e.target.matches('.modal__close-button') || e.target.matches('.form__submit')) {
     openedModals.pop()
       .classList
       .remove('modal_opened');
@@ -19,7 +19,7 @@ const closeModal = (e) => {
   enablePageScroll();
 };
 
-const openModal = (modal) => {
+export const openModal = (modal) => {
   if (!hasOpenedModals()) {
     document.addEventListener('click', closeModal);
     document.addEventListener('keydown', closeModal);
@@ -41,7 +41,7 @@ function fillImageData(
   imageCaptionEl.textContent = headingText;
 }
 
-const openImageInModalWindow = (
+export const openImageInModalWindow = (
   modalImageEl,
   modalImageCoverEl,
   modalImageHeadingEl,
@@ -50,10 +50,4 @@ const openImageInModalWindow = (
 ) => {
   fillImageData(modalImageHeadingEl, modalImageCoverEl, headingText, imageSrc);
   openModal(modalImageEl);
-};
-
-export {
-  closeModal,
-  openModal,
-  openImageInModalWindow,
 };
