@@ -35,21 +35,19 @@ export const profileCaptionEl = profileEl.querySelector('.profile__caption');
 export const profileAvatarEl = profileEl.querySelector('.profile__avatar');
 const profileEditButtonEl = profileEl.querySelector('.profile__edit-button');
 
-window.addEventListener('load', () => {
-  renderCards();
-  renderProfile();
+profileAddCardButtonEl.addEventListener('click', profileAddCardButtonHandler);
+profileEditButtonEl.addEventListener('click', profileEditButtonHandler);
+profileFormEl.addEventListener('submit', profileFormSubmitHandler);
+newCardFormEl.addEventListener('submit', formNewCardSubmitHandler);
 
-  enableValidation({
-    formSelector: '.form',
-    inputSelector: '.form__input',
-    submitButtonSelector: '.form__submit',
-    inactiveButtonClass: 'form__submit_inactive',
-    inputErrorClass: 'form__input_type_error',
-    errorClass: 'form__input-error_active',
-  });
+renderCards();
+renderProfile();
 
-  profileAddCardButtonEl.addEventListener('click', profileAddCardButtonHandler);
-  profileEditButtonEl.addEventListener('click', profileEditButtonHandler);
-  profileFormEl.addEventListener('submit', profileFormSubmitHandler);
-  newCardFormEl.addEventListener('submit', formNewCardSubmitHandler);
+enableValidation({
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__submit',
+  inactiveButtonClass: 'form__submit_inactive',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_active',
 });

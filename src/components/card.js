@@ -53,5 +53,5 @@ export const formNewCardSubmitHandler = (e) => {
   addCardToContainer(cardNode);
   newCardFormEl.reset();
   closeModal(e);
+  console.log('1');
 };
-
