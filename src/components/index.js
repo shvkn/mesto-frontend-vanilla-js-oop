@@ -1,14 +1,14 @@
-import { renderProfile } from './utils';
-import { renderCards } from './card';
+import { renderCards, renderProfile } from './utils';
 
 import {
   profileFormSubmitHandler,
   profileAddCardButtonHandler,
   profileEditButtonHandler,
 } from './profile';
-import { enableValidation } from './validation';
 
-export const forms = document.querySelectorAll('.form');
+import { enableValidation } from './validation';
+import { formNewCardSubmitHandler } from './card';
+
 export const pageEl = document.querySelector('.page');
 export const cardsContainerEl = document.querySelector('.cards');
 export const cardTemplate = document.querySelector('#card-template');
@@ -20,6 +20,7 @@ export const modalImageCoverEl = modalImageEl.querySelector('.modal__cover-image
 export const modalImageHeadingEl = modalImageEl.querySelector('.modal__heading');
 
 export const newCardFormEl = document.querySelector('#form-new-card');
+
 export const newCardFormHeadingEl = newCardFormEl.querySelector('#new-card-heading');
 export const newCardFormImageLink = newCardFormEl.querySelector('#new-card-link');
 
@@ -46,8 +47,9 @@ window.addEventListener('load', () => {
     inputErrorClass: 'form__input_type_error',
     errorClass: 'form__input-error_active',
   });
-});
 
-profileAddCardButtonEl.addEventListener('click', profileAddCardButtonHandler);
-profileEditButtonEl.addEventListener('click', profileEditButtonHandler);
-profileFormEl.addEventListener('submit', profileFormSubmitHandler);
+  profileAddCardButtonEl.addEventListener('click', profileAddCardButtonHandler);
+  profileEditButtonEl.addEventListener('click', profileEditButtonHandler);
+  profileFormEl.addEventListener('submit', profileFormSubmitHandler);
+  newCardFormEl.addEventListener('submit', formNewCardSubmitHandler);
+});

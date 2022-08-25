@@ -37,19 +37,20 @@
 @import "../blocks/profile/__name/profile__name.css";
 @import "../blocks/profile/__caption/profile__caption.css";
 
-@import "../blocks/places/places.css";
-@import "../blocks/card/place.css";
+@import "../blocks/cards/cards.css";
+
+@import "../blocks/card/card.css";
 @import "../blocks/card/__image/card__image.css";
-@import "../blocks/card/__panel/card__panel.css";
-@import "../blocks/card/__like-btn/card__like-btn.css";
-@import "../blocks/card/__like-btn/_active/card__like-btn_active.css";
 @import "../blocks/card/__heading/card__heading.css";
+@import "../blocks/card/__panel/card__panel.css";
+@import "../blocks/card/__like-button/card__like-button.css";
+@import "../blocks/card/__like-button/_active/card__like-button_active.css";
 @import "../blocks/card/__remove-button/card__remove-button.css";
 
 @import "../blocks/footer/footer.css";
 @import "../blocks/footer/__copyright/footer__copyright.css";
 
-@import "../blocks/modal/_type/popup_type_image.css";
+@import "../blocks/modal/_type/modal_type_image.css";
 @import "../blocks/modal/__container/_type/modal__container_type_image.css";
 @import "../blocks/modal/__cover-image/modal__cover-image.css";
 @import "../blocks/modal/__heading/_type/modal__heading_type_image.css";
