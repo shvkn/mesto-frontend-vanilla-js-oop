@@ -6,12 +6,14 @@ import {
   profileAddCardButtonHandler,
   profileEditButtonHandler,
 } from './profile';
+import { enableValidation } from './validation';
 
+export const forms = document.querySelectorAll('.form');
 export const pageEl = document.querySelector('.page');
 export const cardsContainerEl = document.querySelector('.cards');
 export const cardTemplate = document.querySelector('#card-template');
 export const modalNewCardEl = document.querySelector('#modal-new-card');
-const profileAddCardButtonEl = document.querySelector('.profile__add-btn');
+const profileAddCardButtonEl = document.querySelector('.profile__add-button');
 
 export const modalImageEl = document.querySelector('#modal-image');
 export const modalImageCoverEl = modalImageEl.querySelector('.modal__cover-image');
@@ -30,11 +32,20 @@ const profileEl = document.querySelector('.profile');
 export const profileNameEl = profileEl.querySelector('.profile__name');
 export const profileCaptionEl = profileEl.querySelector('.profile__caption');
 export const profileAvatarEl = profileEl.querySelector('.profile__avatar');
-const profileEditButtonEl = profileEl.querySelector('.profile__edit-btn');
+const profileEditButtonEl = profileEl.querySelector('.profile__edit-button');
 
 window.addEventListener('load', () => {
   renderCards();
   renderProfile();
+
+  enableValidation({
+    formSelector: '.form',
+    inputSelector: '.form__input',
+    submitButtonSelector: '.form__submit',
+    inactiveButtonClass: 'form__submit_inactive',
+    inputErrorClass: 'form__input_type_error',
+    errorClass: 'form__input-error_active',
+  });
 });
 
 profileAddCardButtonEl.addEventListener('click', profileAddCardButtonHandler);

@@ -12,33 +12,39 @@
 @import "../blocks/button/button.css";
 
 @import "../blocks/modal/modal.css";
-@import "../blocks/modal/__input/modal__input.css";
 @import "../blocks/modal/__container/modal__container.css";
-@import "../blocks/modal/__fieldset/modal__fieldset.css";
 @import "../blocks/modal/__heading/modal__heading.css";
-@import "../blocks/modal/__close-btn/modal__close-btn.css";
-@import "../blocks/modal/__submit-btn/modal__submit-btn.css";
+@import "../blocks/modal/__close-button/modal__close-button.css";
 @import "../blocks/modal/_opened/modal_opened.css";
+
+@import "../blocks/form/form.css";
+@import "../blocks/form/__input/form__input.css";
+@import "../blocks/form/__input/_type/form__input_type_error.css";
+@import "../blocks/form/__input-error/form__input-error.css";
+@import "../blocks/form/__input-error/_active/form__input-error_active.css";
+@import "../blocks/form/__fieldset/form__fieldset.css";
+@import "../blocks/form/__submit/form__submit.css";
+@import "../blocks/form/__submit/_inactive/form__submit_inactive.css";
 
 @import "../blocks/header/header.css";
 @import "../blocks/header/__logo/header__logo.css";
 
 @import "../blocks/profile/profile.css";
 @import "../blocks/profile/__avatar/profile__avatar.css";
-@import "../blocks/profile/__edit-btn/profile__edit-btn.css";
-@import "../blocks/profile/__add-btn/profile__add-btn.css";
+@import "../blocks/profile/__edit-button/profile__edit-button.css";
+@import "../blocks/profile/__add-button/profile__add-button.css";
 @import "../blocks/profile/__info/profile__info.css";
 @import "../blocks/profile/__name/profile__name.css";
 @import "../blocks/profile/__caption/profile__caption.css";
 
 @import "../blocks/places/places.css";
-@import "../blocks/place/place.css";
-@import "../blocks/place/__image/place__image.css";
-@import "../blocks/place/__panel/place__panel.css";
-@import "../blocks/place/__like-btn/place__like-btn.css";
-@import "../blocks/place/__like-btn/_active/place__like-btn_active.css";
-@import "../blocks/place/__heading/place__heading.css";
-@import "../blocks/place/__remove-btn/place__remove-btn.css";
+@import "../blocks/card/place.css";
+@import "../blocks/card/__image/card__image.css";
+@import "../blocks/card/__panel/card__panel.css";
+@import "../blocks/card/__like-btn/card__like-btn.css";
+@import "../blocks/card/__like-btn/_active/card__like-btn_active.css";
+@import "../blocks/card/__heading/card__heading.css";
+@import "../blocks/card/__remove-button/card__remove-button.css";
 
 @import "../blocks/footer/footer.css";
 @import "../blocks/footer/__copyright/footer__copyright.css";

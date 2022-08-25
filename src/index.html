@@ -21,10 +21,10 @@
       <img class="profile__avatar" src="" alt="">
       <div class="profile__info">
         <h1 class="profile__name" aria-label="Профиль пользователя"></h1>
-        <button class="button profile__edit-btn" type="button" aria-label="Редактировать профиль"></button>
+        <button class="button profile__edit-button" type="button" aria-label="Редактировать профиль"></button>
         <p class="profile__caption" aria-label="Подпись к профилю"></p>
       </div>
-      <button class="button profile__add-btn" type="button" aria-label="Добавить новый пост"></button>
+      <button class="button profile__add-button" type="button" aria-label="Добавить новый пост"></button>
     </section>
 
     <section class="cards"></section>
@@ -37,44 +37,87 @@
 </div>
 
 <div class="modal" id="modal-profile">
-  <form class="modal__container" action="#" name="form-profile" id="form-profile">
-    <h2 class="modal__heading">Редактировать профиль</h2>
-    <fieldset class="modal__fieldset">
-      <input class="modal__input" type="text"
-             name="profile-name" id="profile-name" placeholder="Имя" aria-label="Имя"
-             required>
-      <input class="modal__input" type="text"
-             name="profile-caption" id="profile-caption" placeholder="Подпись" aria-label="Подпись"
-             required>
-    </fieldset>
-    <button class="button modal__submit-btn" type="submit" aria-label="Сохранить изменения">Сохранить</button>
-    <button class="button modal__close-btn" type="reset" aria-label="Закрыть окно"></button>
-  </form>
+  <div class="modal__container">
+    <button class="button modal__close-button" type="reset" aria-label="Закрыть окно"></button>
+    <form class="form" action="#" name="form-profile" id="form-profile" novalidate>
+      <h2 class="modal__heading">Редактировать профиль</h2>
+      <fieldset class="form__fieldset">
+
+        <input class="form__input"
+               type="text"
+               name="profile-name"
+               id="profile-name"
+               placeholder="Имя"
+               aria-label="Имя"
+               required
+               minlength="2"
+               maxlength="40"
+               pattern="^[a-zA-Zа-яА-Я- ]+$"
+               data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
+
+        <span class="profile-name-error form__input-error"></span>
+
+        <input class="form__input"
+               type="text"
+               name="profile-caption"
+               id="profile-caption"
+               placeholder="Подпись"
+               aria-label="Подпись"
+               required
+               minlength="2"
+               maxlength="200"
+               pattern="^[a-zA-Zа-яА-Я- ]+$"
+               data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
+        <span class="profile-caption-error form__input-error"></span>
+      </fieldset>
+
+      <button class="button form__submit" type="submit" aria-label="Сохранить изменения">Сохранить</button>
+    </form>
+  </div>
 </div>
 
 <div class="modal" id="modal-new-card">
-  <form class="modal__container" action="#" name="form-new-card" id="form-new-card">
-    <button class="button modal__close-btn" type="reset" aria-label="Закрыть окно"></button>
-    <h2 class="modal__heading">Новое место</h2>
-    <fieldset class="modal__fieldset">
-      <input class="modal__input" type="text"
-             name="new-card-heading" id="new-card-heading" placeholder="Название места"
-             aria-label="Введите название места"
-             required>
-      <input class="modal__input" type="url"
-             name="new-card-link" id="new-card-link" placeholder="Ссылка на картинку"
-             aria-label="Введите ссылку на картинку"
-             required>
-    </fieldset>
-    <button class="button modal__submit-btn" type="submit" aria-label="Добавить место">Сохранить</button>
-  </form>
+  <div class="modal__container">
+    <form class="form" action="#" name="form-new-card" id="form-new-card" novalidate>
+      <button class="button modal__close-button" type="reset" aria-label="Закрыть окно"></button>
+      <h2 class="modal__heading">Новое место</h2>
+      <fieldset class="form__fieldset">
+
+        <input class="form__input"
+               type="text"
+               name="new-card-heading"
+               id="new-card-heading"
+               placeholder="Название места"
+               aria-label="Введите название места"
+               required
+               minlength="2"
+               maxlength="30"
+               pattern="^[a-zA-Zа-яА-Я- ]+$"
+               data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
+
+        <span class="new-card-heading-error form__input-error"></span>
+
+        <input class="form__input"
+               type="url"
+               name="new-card-link"
+               id="new-card-link"
+               placeholder="Ссылка на картинку"
+               aria-label="Введите ссылку на картинку"
+               required>
+
+        <span class="new-card-link-error form__input-error"></span>
+
+      </fieldset>
+      <button class="button form__submit" type="submit" aria-label="Добавить место">Сохранить</button>
+    </form>
+  </div>
 </div>
 
 <div class="modal modal_type_image" id="modal-image">
   <div class="modal__container modal__container_type_image">
     <h2 class="modal__heading modal__heading_type_image"></h2>
     <img class="modal__cover-image" src="" alt="">
-    <button class="button modal__close-btn" type="button" aria-label="Закрыть окно"></button>
+    <button class="button modal__close-button" type="button" aria-label="Закрыть окно"></button>
   </div>
 </div>
 
@@ -84,7 +127,7 @@
     <figcaption class="card__panel">
       <h2 class="card__heading"></h2>
       <button class="button card__like-btn" type="button" aria-label="Лайкнуть место"></button>
-      <button class="button card__remove-btn" type="button" aria-label="Удалить место"></button>
+      <button class="button card__remove-button" type="button" aria-label="Удалить место"></button>
     </figcaption>
   </figure>
 </template>

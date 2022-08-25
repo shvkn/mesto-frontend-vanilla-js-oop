@@ -1,8 +1,10 @@
+export const avatarLink = new URL('../images/profile-avatar.jpg', import.meta.url).href;
+
 export const data = {
   profile: {
     name: 'Жак-Ив Кусто',
     caption: 'Исследователь океана',
-    avatar: new URL('../images/profile-avatar.jpg', import.meta.url),
+    avatar: avatarLink,
   },
 
   places: [
