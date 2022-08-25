@@ -6,8 +6,13 @@ const enablePageScroll = () => pageEl.classList.remove('hide-overflow');
 const openedModals = [];
 const hasOpenedModals = () => openedModals.length > 0;
 
+const isClosingElement = (element) => {
+  const closingElements = ['.modal', '.modal__close-button', '.form__submit'];
+  return closingElements.some((closingElement) => element.matches(closingElement));
+};
+
 export const closeModal = (e) => {
-  if (e.key === 'Escape' || e.target.matches('.modal') || e.target.matches('.modal__close-button') || e.target.matches('.form__submit')) {
+  if (e.key === 'Escape' || isClosingElement(e.target)) {
     openedModals.pop()
       .classList
       .remove('modal_opened');

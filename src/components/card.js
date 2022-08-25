@@ -1,14 +1,19 @@
 import { closeModal, openImageInModalWindow } from './modal';
-import { data } from './data';
 import {
-  cardsContainerEl,
   newCardFormImageLink,
+  newCardFormHeadingEl,
+  modalImageHeadingEl,
+  modalImageCoverEl,
+  modalImageEl,
+  cardTemplate,
   newCardFormEl,
-  newCardFormHeadingEl, modalImageHeadingEl, modalImageCoverEl, modalImageEl, cardTemplate,
 } from './index';
 
+import { addCardToContainer } from './utils';
+import { data } from './data';
+
 const setLike = (e) => {
-  e.target.classList.toggle('place__like-btn_active');
+  e.target.classList.toggle('card__like-button_active');
 };
 
 const removeCard = (e) => {
@@ -21,7 +26,7 @@ export const createCardNode = (heading, imageLink) => {
     .cloneNode(true);
   const cardImage = card.querySelector('.card__image');
   const cardHeading = card.querySelector('.card__heading');
-  const cardLikeButton = card.querySelector('.card__like-btn');
+  const cardLikeButton = card.querySelector('.card__like-button');
   const cardRemoveButton = card.querySelector('.card__remove-button');
 
   cardImage.src = imageLink;
@@ -42,18 +47,7 @@ export const createCardNode = (heading, imageLink) => {
   return card;
 };
 
-const addCardToContainer = (card) => {
-  cardsContainerEl.prepend(card);
-};
-
-export const renderCards = () => {
-  data.places.forEach((cardObj) => {
-    const cardNode = createCardNode(cardObj.name, cardObj.link);
-    addCardToContainer(cardNode);
-  });
-};
-
-const formNewCardSubmitHandler = (e) => {
+export const formNewCardSubmitHandler = (e) => {
   e.preventDefault();
   const cardNode = createCardNode(newCardFormHeadingEl.value, newCardFormImageLink.value);
   addCardToContainer(cardNode);
@@ -61,4 +55,3 @@ const formNewCardSubmitHandler = (e) => {
   closeModal(e);
 };
 
-newCardFormEl.addEventListener('submit', formNewCardSubmitHandler);

@@ -1,4 +1,5 @@
 import {
+  cardsContainerEl,
   profileAvatarEl,
   profileCaptionEl,
   profileFormCaptionEl,
@@ -6,8 +7,9 @@ import {
   profileNameEl,
 } from './index';
 import { data } from './data';
+import { createCardNode } from './card';
 
-const renderProfile = () => {
+export const renderProfile = () => {
   profileNameEl.textContent = data.profile.name;
   profileCaptionEl.textContent = data.profile.caption;
   profileAvatarEl.src = data.profile.avatar;
@@ -15,14 +17,20 @@ const renderProfile = () => {
   profileFormCaptionEl.value = data.profile.caption;
 };
 
-const setProfileData = (name, caption, avatar) => {
+export const setProfileData = (name, caption, avatar) => {
   data.profile.name = name;
   data.profile.caption = caption;
   data.profile.avatar = avatar;
   renderProfile();
 };
 
-export {
-  renderProfile,
-  setProfileData,
+export const addCardToContainer = (card) => {
+  cardsContainerEl.prepend(card);
+};
+
+export const renderCards = () => {
+  data.places.forEach((cardObj) => {
+    const cardNode = createCardNode(cardObj.name, cardObj.link);
+    addCardToContainer(cardNode);
+  });
 };
