@@ -1,16 +1,10 @@
-import { renderCards, renderProfile } from './utils';
-
-import {
-  profileFormSubmitHandler,
-  profileAddCardButtonHandler,
-  profileEditButtonHandler,
-} from './profile';
+import { addCardToContainer } from './utils';
 
 import { enableValidation } from './validation';
-import { formNewCardSubmitHandler } from './card';
-import { closeModal } from './modal';
+import { createCardNode, formNewCardSubmitHandler } from './card';
+import { closeModal, openModal } from './modal';
+import { cards } from './data';
 
-export const pageEl = document.querySelector('.page');
 export const cardsContainerEl = document.querySelector('.cards');
 export const cardTemplate = document.querySelector('#card-template');
 export const modalNewCardEl = document.querySelector('#modal-new-card');
@@ -21,7 +15,6 @@ export const modalImageCoverEl = modalImageEl.querySelector('.modal__cover-image
 export const modalImageHeadingEl = modalImageEl.querySelector('.modal__heading');
 
 export const newCardFormEl = document.querySelector('#form-new-card');
-
 export const newCardFormHeadingEl = newCardFormEl.querySelector('#new-card-heading');
 export const newCardFormImageLink = newCardFormEl.querySelector('#new-card-link');
 
@@ -31,18 +24,48 @@ export const profileFormNameEl = profileFormEl.querySelector('#profile-name');
 export const profileFormCaptionEl = profileFormEl.querySelector('#profile-caption');
 
 const profileEl = document.querySelector('.profile');
-export const profileNameEl = profileEl.querySelector('.profile__name');
-export const profileCaptionEl = profileEl.querySelector('.profile__caption');
-export const profileAvatarEl = profileEl.querySelector('.profile__avatar');
 const profileEditButtonEl = profileEl.querySelector('.profile__edit-button');
+const profileNameEl = profileEl.querySelector('.profile__name');
+const profileCaptionEl = profileEl.querySelector('.profile__caption');
+
+const getProfileData = () => {
+  profileFormNameEl.value = profileNameEl.textContent;
+  profileFormCaptionEl.value = profileCaptionEl.textContent;
+};
+
+const setProfileData = (name, caption) => {
+  profileNameEl.textContent = name;
+  profileCaptionEl.textContent = caption;
+};
+
+const profileEditButtonHandler = () => {
+  getProfileData();
+  openModal(modalProfileEl);
+};
+
+const profileFormSubmitHandler = (e) => {
+  e.preventDefault();
+  profileNameEl.textContent = profileFormNameEl.value;
+  profileCaptionEl.textContent = profileFormCaptionEl.value;
+  profileFormEl.reset();
+  closeModal(modalProfileEl);
+};
+
+const profileAddCardButtonHandler = () => {
+  openModal(modalNewCardEl);
+};
 
 profileAddCardButtonEl.addEventListener('click', profileAddCardButtonHandler);
 profileEditButtonEl.addEventListener('click', profileEditButtonHandler);
 profileFormEl.addEventListener('submit', profileFormSubmitHandler);
 newCardFormEl.addEventListener('submit', formNewCardSubmitHandler);
 
-renderCards();
-renderProfile();
+cards.forEach((cardObj) => {
+  const cardNode = createCardNode(cardObj.name, cardObj.link);
+  addCardToContainer(cardNode);
+});
+
+setProfileData('Жак-Ив Кусто', 'Исследователь океана');
 
 enableValidation({
   formSelector: '.form',
@@ -53,10 +76,11 @@ enableValidation({
   errorClass: 'form__input-error_active',
 });
 
-document.querySelectorAll('.modal').forEach((modal) => {
-  modal.addEventListener('mousedown', (e) => {
-    if (e.target.classList.contains('modal') || e.target.classList.contains('modal__close-button')) {
-      closeModal(modal);
-    }
+document.querySelectorAll('.modal')
+  .forEach((modal) => {
+    modal.addEventListener('mousedown', (e) => {
+      if (e.target.classList.contains('modal') || e.target.classList.contains('modal__close-button')) {
+        closeModal(modal);
+      }
+    });
   });
-});
