@@ -1,47 +1,40 @@
-import { renderCards, renderProfile } from './utils';
+import { enableValidation, formChangedEvent } from './validation';
+import { createCardNode } from './card';
+import { closeModal, openModal } from './modal';
+import { initModals } from './utils';
+import { cards } from './initial-cards';
 
-import {
-  profileFormSubmitHandler,
-  profileAddCardButtonHandler,
-  profileEditButtonHandler,
-} from './profile';
+const cardsContainerEl = document.querySelector('.cards');
+const modalNewCardEl = document.querySelector('#modal-new-card');
+const addCardButtonEl = document.querySelector('.profile__add-button');
 
-import { enableValidation } from './validation';
-import { formNewCardSubmitHandler } from './card';
+const newCardFormEl = document.querySelector('#form-new-card');
+const newCardFormHeadingEl = newCardFormEl.querySelector('#new-card-heading');
+const newCardFormImageLink = newCardFormEl.querySelector('#new-card-link');
 
-export const pageEl = document.querySelector('.page');
-export const cardsContainerEl = document.querySelector('.cards');
-export const cardTemplate = document.querySelector('#card-template');
-export const modalNewCardEl = document.querySelector('#modal-new-card');
-const profileAddCardButtonEl = document.querySelector('.profile__add-button');
-
-export const modalImageEl = document.querySelector('#modal-image');
-export const modalImageCoverEl = modalImageEl.querySelector('.modal__cover-image');
-export const modalImageHeadingEl = modalImageEl.querySelector('.modal__heading');
-
-export const newCardFormEl = document.querySelector('#form-new-card');
-
-export const newCardFormHeadingEl = newCardFormEl.querySelector('#new-card-heading');
-export const newCardFormImageLink = newCardFormEl.querySelector('#new-card-link');
-
-export const modalProfileEl = document.querySelector('#modal-profile');
+const modalProfileEl = document.querySelector('#modal-profile');
 const profileFormEl = modalProfileEl.querySelector('#form-profile');
-export const profileFormNameEl = profileFormEl.querySelector('#profile-name');
-export const profileFormCaptionEl = profileFormEl.querySelector('#profile-caption');
+const profileFormNameEl = profileFormEl.querySelector('#profile-name');
+const profileFormCaptionEl = profileFormEl.querySelector('#profile-caption');
 
 const profileEl = document.querySelector('.profile');
-export const profileNameEl = profileEl.querySelector('.profile__name');
-export const profileCaptionEl = profileEl.querySelector('.profile__caption');
-export const profileAvatarEl = profileEl.querySelector('.profile__avatar');
 const profileEditButtonEl = profileEl.querySelector('.profile__edit-button');
+const profileNameEl = profileEl.querySelector('.profile__name');
+const profileCaptionEl = profileEl.querySelector('.profile__caption');
 
-profileAddCardButtonEl.addEventListener('click', profileAddCardButtonHandler);
-profileEditButtonEl.addEventListener('click', profileEditButtonHandler);
-profileFormEl.addEventListener('submit', profileFormSubmitHandler);
-newCardFormEl.addEventListener('submit', formNewCardSubmitHandler);
+const getProfileData = () => {
+  profileFormNameEl.value = profileNameEl.textContent;
+  profileFormCaptionEl.value = profileCaptionEl.textContent;
+  profileFormEl.dispatchEvent(formChangedEvent);
+};
 
-renderCards();
-renderProfile();
+const setProfileData = ({
+  name,
+  caption,
+}) => {
+  profileNameEl.textContent = name;
+  profileCaptionEl.textContent = caption;
+};
 
 enableValidation({
   formSelector: '.form',
@@ -50,4 +43,63 @@ enableValidation({
   inactiveButtonClass: 'form__submit_inactive',
   inputErrorClass: 'form__input_type_error',
   errorClass: 'form__input-error_active',
+});
+
+const profileEditButtonHandler = () => {
+  getProfileData();
+  openModal(modalProfileEl);
+};
+
+const profileFormSubmitHandler = (e) => {
+  e.preventDefault();
+  setProfileData({
+    name: profileFormNameEl.value,
+    caption: profileFormCaptionEl.value,
+  });
+  profileFormEl.reset();
+  closeModal(modalProfileEl);
+};
+
+profileEditButtonEl.addEventListener('click', profileEditButtonHandler);
+profileFormEl.addEventListener('submit', profileFormSubmitHandler);
+
+const addCardButtonHandler = () => {
+  openModal(modalNewCardEl);
+};
+
+addCardButtonEl.addEventListener('click', addCardButtonHandler);
+
+const addCardToContainer = (card) => {
+  cardsContainerEl.prepend(card);
+};
+
+const formNewCardSubmitHandler = (e) => {
+  e.preventDefault();
+  const cardNode = createCardNode({
+    heading: newCardFormHeadingEl.value,
+    imageLink: newCardFormImageLink.value,
+  });
+  addCardToContainer(cardNode);
+  newCardFormEl.reset();
+  closeModal(modalNewCardEl);
+};
+
+newCardFormEl.addEventListener('submit', formNewCardSubmitHandler);
+
+const renderCards = () => {
+  cards.forEach((cardObj) => {
+    const cardNode = createCardNode({
+      heading: cardObj.name,
+      imageLink: cardObj.link,
+    });
+    addCardToContainer(cardNode);
+  });
+};
+
+renderCards();
+initModals();
+
+setProfileData({
+  name: 'Жак-Ив Кусто',
+  caption: 'Исследователь океана',
 });

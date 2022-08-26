@@ -1,16 +1,6 @@
-import { closeModal, openImageInModalWindow } from './modal';
-import {
-  newCardFormImageLink,
-  newCardFormHeadingEl,
-  modalImageHeadingEl,
-  modalImageCoverEl,
-  modalImageEl,
-  cardTemplate,
-  newCardFormEl,
-} from './index';
+import { openImageModal } from './modal';
 
-import { addCardToContainer } from './utils';
-import { data } from './data';
+const cardTemplate = document.querySelector('#card-template');
 
 const setLike = (e) => {
   e.target.classList.toggle('card__like-button_active');
@@ -21,7 +11,10 @@ const removeCard = (e) => {
     .remove();
 };
 
-export const createCardNode = (heading, imageLink) => {
+export const createCardNode = ({
+  heading,
+  imageLink,
+}) => {
   const card = cardTemplate.content.querySelector('.card')
     .cloneNode(true);
   const cardImage = card.querySelector('.card__image');
@@ -34,24 +27,6 @@ export const createCardNode = (heading, imageLink) => {
   cardHeading.textContent = heading;
   cardLikeButton.addEventListener('click', setLike);
   cardRemoveButton.addEventListener('click', removeCard);
-
-  cardImage.addEventListener('click', () => {
-    openImageInModalWindow(
-      modalImageEl,
-      modalImageCoverEl,
-      modalImageHeadingEl,
-      imageLink,
-      heading,
-    );
-  });
+  cardImage.addEventListener('click', () => openImageModal(imageLink, heading));
   return card;
-};
-
-export const formNewCardSubmitHandler = (e) => {
-  e.preventDefault();
-  const cardNode = createCardNode(newCardFormHeadingEl.value, newCardFormImageLink.value);
-  addCardToContainer(cardNode);
-  newCardFormEl.reset();
-  closeModal(e);
-  console.log('1');
 };
