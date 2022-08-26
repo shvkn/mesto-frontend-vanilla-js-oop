@@ -10,7 +10,7 @@ import { avatarLink } from './data';
 export const profileFormSubmitHandler = (e) => {
   e.preventDefault();
   setProfileData(profileFormNameEl.value, profileFormCaptionEl.value, avatarLink);
-  closeModal(e);
+  // closeModal(e);
 };
 
 export const profileEditButtonHandler = () => {

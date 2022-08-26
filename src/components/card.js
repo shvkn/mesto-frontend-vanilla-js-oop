@@ -52,6 +52,6 @@ export const formNewCardSubmitHandler = (e) => {
   const cardNode = createCardNode(newCardFormHeadingEl.value, newCardFormImageLink.value);
   addCardToContainer(cardNode);
   newCardFormEl.reset();
-  closeModal(e);
-  console.log('1');
+  // closeModal(e);
+  // console.log('1');
 };
