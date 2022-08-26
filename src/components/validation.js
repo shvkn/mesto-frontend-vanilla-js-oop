@@ -1,20 +1,22 @@
+export const formChangedEvent = new Event('formChanged');
+
 const hasInvalidInput = (inputList) => inputList.some((inputElement) => !inputElement.validity.valid);
 
-const inactivateButton = (buttonElement, inactiveButtonClass) => {
-  buttonElement.classList.remove(inactiveButtonClass);
-  buttonElement.removeAttribute('disabled');
-};
-
-const activateButton = (buttonElement, inactiveButtonClass) => {
+const deactivateButton = (buttonElement, inactiveButtonClass) => {
   buttonElement.classList.add(inactiveButtonClass);
   buttonElement.setAttribute('disabled', '');
 };
 
+const activateButton = (buttonElement, inactiveButtonClass) => {
+  buttonElement.classList.remove(inactiveButtonClass);
+  buttonElement.removeAttribute('disabled');
+};
+
 const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
   if (hasInvalidInput(inputList)) {
-    activateButton(buttonElement, inactiveButtonClass);
+    deactivateButton(buttonElement, inactiveButtonClass);
   } else {
-    inactivateButton(buttonElement, inactiveButtonClass);
+    activateButton(buttonElement, inactiveButtonClass);
   }
 };
 
@@ -65,8 +67,12 @@ const setEventListeners = (
   toggleButtonState(inputList, submitButton, inactiveButtonClass);
 
   formElement.addEventListener('submit', () => {
-    toggleButtonState(inputList, submitButton, inactiveButtonClass);
+    deactivateButton(submitButton, inactiveButtonClass);
   });
+
+  formElement.addEventListener('formChanged', () => {
+    toggleButtonState(inputList, submitButton, inactiveButtonClass);
+  }, false);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
