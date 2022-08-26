@@ -8,6 +8,7 @@ import {
 
 import { enableValidation } from './validation';
 import { formNewCardSubmitHandler } from './card';
+import { closeModal } from './modal';
 
 export const pageEl = document.querySelector('.page');
 export const cardsContainerEl = document.querySelector('.cards');
@@ -50,4 +51,12 @@ enableValidation({
   inactiveButtonClass: 'form__submit_inactive',
   inputErrorClass: 'form__input_type_error',
   errorClass: 'form__input-error_active',
+});
+
+document.querySelectorAll('.modal').forEach((modal) => {
+  modal.addEventListener('mousedown', (e) => {
+    if (e.target.classList.contains('modal') || e.target.classList.contains('modal__close-button')) {
+      closeModal(modal);
+    }
+  });
 });
