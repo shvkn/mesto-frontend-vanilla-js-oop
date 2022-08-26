@@ -1,3 +1,7 @@
+const modalImageEl = document.querySelector('#modal-image');
+const modalImageCoverEl = modalImageEl.querySelector('.modal__cover-image');
+const modalImageHeadingEl = modalImageEl.querySelector('.modal__heading');
+
 const closeByEsc = (e) => {
   if (e.key === 'Escape') {
     const openedModal = document.querySelector('.modal_opened');
@@ -15,25 +19,20 @@ export const openModal = (modal) => {
   document.addEventListener('keydown', closeByEsc);
 };
 
-function fillImageData(
-  imageCaptionEl,
-  imageEl,
-  headingText,
+function fillImageData({
   imageSrc,
+  headingText,
   imageAlt = headingText,
-) {
-  imageEl.src = imageSrc;
-  imageEl.alt = imageAlt;
-  imageCaptionEl.textContent = headingText;
+}) {
+  modalImageCoverEl.src = imageSrc;
+  modalImageCoverEl.alt = imageAlt;
+  modalImageHeadingEl.textContent = headingText;
 }
 
-export const openImageInModalWindow = (
-  modalImageEl,
-  modalImageCoverEl,
-  modalImageHeadingEl,
-  imageSrc,
-  headingText,
-) => {
-  fillImageData(modalImageHeadingEl, modalImageCoverEl, headingText, imageSrc);
+export const openImageModal = (imageSrc, headingText) => {
+  fillImageData({
+    imageSrc,
+    headingText,
+  });
   openModal(modalImageEl);
 };

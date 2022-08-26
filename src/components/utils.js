@@ -1,19 +1,12 @@
-import {
-  cardsContainerEl,
-} from './index';
+import { closeModal } from './modal';
 
-import { data } from './data';
-import { createCardNode } from './card';
-
-const profileEl = document.querySelector('.profile');
-const profileNameEl = profileEl.querySelector('.profile__name');
-const profileCaptionEl = profileEl.querySelector('.profile__caption');
-
-
-
-export const addCardToContainer = (card) => {
-  cardsContainerEl.prepend(card);
+export const initModals = () => {
+  document.querySelectorAll('.modal')
+    .forEach((modal) => {
+      modal.addEventListener('mousedown', (e) => {
+        if (e.target.classList.contains('modal') || e.target.classList.contains('modal__close-button')) {
+          closeModal(modal);
+        }
+      });
+    });
 };
-
-
-
