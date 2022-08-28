@@ -1,7 +1,7 @@
-import { enableValidation, formChangedEvent } from './validation';
+import { deactivateButton, enableValidation } from './validation';
 import { createCardNode } from './card';
 import { closeModal, openModal } from './modal';
-import { initModals } from './utils';
+import { clearForm, initModals } from './utils';
 import { cards } from './initial-cards';
 
 const cardsContainerEl = document.querySelector('.cards');
@@ -10,22 +10,30 @@ const addCardButtonEl = document.querySelector('.profile__add-button');
 
 const newCardFormEl = document.querySelector('#form-new-card');
 const newCardFormHeadingEl = newCardFormEl.querySelector('#new-card-heading');
-const newCardFormImageLink = newCardFormEl.querySelector('#new-card-link');
+const newCardFormImageLinkEl = newCardFormEl.querySelector('#new-card-link');
+const newCardFormSubmitEl = newCardFormEl.querySelector('.form__submit');
 
 const modalProfileEl = document.querySelector('#modal-profile');
 const profileFormEl = modalProfileEl.querySelector('#form-profile');
 const profileFormNameEl = profileFormEl.querySelector('#profile-name');
 const profileFormCaptionEl = profileFormEl.querySelector('#profile-caption');
+const profileFormSubmitEl = profileFormEl.querySelector('.form__submit');
 
 const profileEl = document.querySelector('.profile');
 const profileEditButtonEl = profileEl.querySelector('.profile__edit-button');
 const profileNameEl = profileEl.querySelector('.profile__name');
 const profileCaptionEl = profileEl.querySelector('.profile__caption');
 
+const formSelectorClass = '.form';
+const inputSelectorClass = '.form__input';
+const submitButtonSelectorClass = '.form__submit';
+const inactiveButtonClass = 'form__submit_inactive';
+const inputErrorClass = 'form__input_type_error';
+const errorClass = 'form__input-error_active';
+
 const getProfileData = () => {
   profileFormNameEl.value = profileNameEl.textContent;
   profileFormCaptionEl.value = profileCaptionEl.textContent;
-  profileFormEl.dispatchEvent(formChangedEvent);
 };
 
 const setProfileData = ({
@@ -36,18 +44,16 @@ const setProfileData = ({
   profileCaptionEl.textContent = caption;
 };
 
-enableValidation({
-  formSelector: '.form',
-  inputSelector: '.form__input',
-  submitButtonSelector: '.form__submit',
-  inactiveButtonClass: 'form__submit_inactive',
-  inputErrorClass: 'form__input_type_error',
-  errorClass: 'form__input-error_active',
-});
-
 const profileEditButtonHandler = () => {
+  clearForm({
+    formElement: profileFormEl,
+    inputSelectorClass,
+    inputErrorClass,
+    errorClass,
+  });
   getProfileData();
   openModal(modalProfileEl);
+  deactivateButton(profileFormSubmitEl, inactiveButtonClass);
 };
 
 const profileFormSubmitHandler = (e) => {
@@ -56,34 +62,37 @@ const profileFormSubmitHandler = (e) => {
     name: profileFormNameEl.value,
     caption: profileFormCaptionEl.value,
   });
-  profileFormEl.reset();
   closeModal(modalProfileEl);
 };
 
-profileEditButtonEl.addEventListener('click', profileEditButtonHandler);
-profileFormEl.addEventListener('submit', profileFormSubmitHandler);
-
-const addCardButtonHandler = () => {
+const newCardButtonHandler = () => {
+  clearForm({
+    formElement: newCardFormEl,
+    inputSelectorClass,
+    inputErrorClass,
+    errorClass,
+  });
   openModal(modalNewCardEl);
+  deactivateButton(newCardFormSubmitEl, inactiveButtonClass);
 };
 
-addCardButtonEl.addEventListener('click', addCardButtonHandler);
-
-const addCardToContainer = (card) => {
-  cardsContainerEl.prepend(card);
+const addCardToContainer = (card, container) => {
+  container.prepend(card);
 };
 
 const formNewCardSubmitHandler = (e) => {
   e.preventDefault();
   const cardNode = createCardNode({
     heading: newCardFormHeadingEl.value,
-    imageLink: newCardFormImageLink.value,
+    imageLink: newCardFormImageLinkEl.value,
   });
-  addCardToContainer(cardNode);
-  newCardFormEl.reset();
+  addCardToContainer(cardNode, cardsContainerEl);
   closeModal(modalNewCardEl);
 };
 
+profileEditButtonEl.addEventListener('click', profileEditButtonHandler);
+addCardButtonEl.addEventListener('click', newCardButtonHandler);
+profileFormEl.addEventListener('submit', profileFormSubmitHandler);
 newCardFormEl.addEventListener('submit', formNewCardSubmitHandler);
 
 const renderCards = () => {
@@ -92,9 +101,18 @@ const renderCards = () => {
       heading: cardObj.name,
       imageLink: cardObj.link,
     });
-    addCardToContainer(cardNode);
+    addCardToContainer(cardNode, cardsContainerEl);
   });
 };
+
+enableValidation({
+  formSelectorClass,
+  inputSelectorClass,
+  submitButtonSelectorClass,
+  inactiveButtonClass,
+  inputErrorClass,
+  errorClass,
+});
 
 renderCards();
 initModals();
