@@ -1,7 +1,7 @@
 import { deactivateButton, enableValidation } from './validation';
 import { createCardNode } from './card';
 import { closeModal, openModal } from './modal';
-import { initModals } from './utils';
+import { clearForm, initModals } from './utils';
 import { cards } from './initial-cards';
 
 const cardsContainerEl = document.querySelector('.cards');
@@ -45,6 +45,12 @@ const setProfileData = ({
 };
 
 const profileEditButtonHandler = () => {
+  clearForm({
+    formElement: profileFormEl,
+    inputSelectorClass,
+    inputErrorClass,
+    errorClass,
+  });
   getProfileData();
   openModal(modalProfileEl);
   deactivateButton(profileFormSubmitEl, inactiveButtonClass);
@@ -56,11 +62,16 @@ const profileFormSubmitHandler = (e) => {
     name: profileFormNameEl.value,
     caption: profileFormCaptionEl.value,
   });
-  profileFormEl.reset();
   closeModal(modalProfileEl);
 };
 
 const newCardButtonHandler = () => {
+  clearForm({
+    formElement: newCardFormEl,
+    inputSelectorClass,
+    inputErrorClass,
+    errorClass,
+  });
   openModal(modalNewCardEl);
   deactivateButton(newCardFormSubmitEl, inactiveButtonClass);
 };
@@ -76,7 +87,6 @@ const formNewCardSubmitHandler = (e) => {
     imageLink: newCardFormImageLinkEl.value,
   });
   addCardToContainer(cardNode, cardsContainerEl);
-  newCardFormEl.reset();
   closeModal(modalNewCardEl);
 };
 
