@@ -5,6 +5,7 @@ const config = {
 
 const headers = {
   authorization: config.token,
+  'Content-Type': 'application/json',
 };
 
 const response = (res, errorMessage) => {
@@ -19,3 +20,15 @@ export const fetchUserInfo = () => fetch(`${config.baseUrl}/users/me`, { headers
 
 export const fetchCards = () => fetch(`${config.baseUrl}/cards`, { headers })
   .then((res) => response(res, 'Error in fetchCards'));
+
+export const updateUserData = ({
+  name,
+  about
+}) => fetch(`${config.baseUrl}/users/me`, {
+  method: 'PATCH',
+  headers,
+  body: JSON.stringify({
+    name,
+    about,
+  }),
+});

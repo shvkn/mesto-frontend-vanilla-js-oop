@@ -2,7 +2,7 @@ import { deactivateButton, enableValidation } from './validation';
 import { createCardNode } from './card';
 import { closeModal, openModal } from './modal';
 import { clearForm, initModals } from './utils';
-import { fetchCards, fetchUserInfo } from './api';
+import { fetchCards, fetchUserInfo, updateUserData } from './api';
 
 const cardsContainerEl = document.querySelector('.cards');
 const modalNewCardEl = document.querySelector('#modal-new-card');
@@ -45,12 +45,29 @@ function setAvatar({
   profileAvatarEl.alt = alt;
 }
 
-const setProfileData = ({
+function renderUserData({
+  name,
+  about,
+}) {
+  profileNameEl.textContent = name;
+  profileCaptionEl.textContent = about;
+}
+
+const updateProfileData = ({
   name,
   about,
 }) => {
-  profileNameEl.textContent = name;
-  profileCaptionEl.textContent = about;
+  updateUserData({
+    name,
+    about,
+  })
+    .then((userData) => userData.json())
+    .then((userData) => {
+      renderUserData({
+        name: userData.name,
+        about: userData.about,
+      });
+    });
 };
 
 const profileEditButtonHandler = () => {
@@ -67,7 +84,7 @@ const profileEditButtonHandler = () => {
 
 const profileFormSubmitHandler = (e) => {
   e.preventDefault();
-  setProfileData({
+  updateProfileData({
     name: profileFormNameEl.value,
     about: profileFormCaptionEl.value,
   });
@@ -127,7 +144,7 @@ initModals();
 
 fetchUserInfo()
   .then((user) => {
-    setProfileData({
+    renderUserData({
       name: user.name,
       about: user.about,
     });
