@@ -139,6 +139,7 @@ const renderCards = (cards = []) => {
     const cardNode = createCardNode({
       heading: cardObj.name,
       imageLink: cardObj.link,
+      likes: cardObj.likes.length,
     });
     addCardToContainer(cardNode, cardsContainerEl);
   });
