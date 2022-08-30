@@ -2,7 +2,9 @@ import { deactivateButton, enableValidation } from './validation';
 import { createCardNode } from './card';
 import { closeModal, openModal } from './modal';
 import { clearForm, initModals } from './utils';
-import { fetchCards, fetchUserInfo, updateUserData } from './api';
+import {
+  addNewCard, fetchCards, fetchUserInfo, updateUserData,
+} from './api';
 
 const cardsContainerEl = document.querySelector('.cards');
 const modalNewCardEl = document.querySelector('#modal-new-card');
@@ -108,12 +110,23 @@ const addCardToContainer = (card, container) => {
 
 const formNewCardSubmitHandler = (e) => {
   e.preventDefault();
-  const cardNode = createCardNode({
-    heading: newCardFormHeadingEl.value,
-    imageLink: newCardFormImageLinkEl.value,
-  });
-  addCardToContainer(cardNode, cardsContainerEl);
-  closeModal(modalNewCardEl);
+
+  const name = newCardFormHeadingEl.value;
+  const link = newCardFormImageLinkEl.value;
+
+  addNewCard({
+    name,
+    link,
+  })
+    .then((card) => card.json())
+    .then((card) => {
+      const cardNode = createCardNode({
+        heading: card.name,
+        imageLink: card.link,
+      });
+      addCardToContainer(cardNode, cardsContainerEl);
+      closeModal(modalNewCardEl);
+    });
 };
 
 profileEditButtonEl.addEventListener('click', profileEditButtonHandler);
@@ -122,7 +135,7 @@ profileFormEl.addEventListener('submit', profileFormSubmitHandler);
 newCardFormEl.addEventListener('submit', formNewCardSubmitHandler);
 
 const renderCards = (cards = []) => {
-  cards.forEach((cardObj) => {
+  cards.slice().reverse().forEach((cardObj) => {
     const cardNode = createCardNode({
       heading: cardObj.name,
       imageLink: cardObj.link,

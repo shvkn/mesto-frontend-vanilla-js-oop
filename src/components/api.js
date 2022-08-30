@@ -23,12 +23,24 @@ export const fetchCards = () => fetch(`${config.baseUrl}/cards`, { headers })
 
 export const updateUserData = ({
   name,
-  about
+  about,
 }) => fetch(`${config.baseUrl}/users/me`, {
   method: 'PATCH',
   headers,
   body: JSON.stringify({
     name,
     about,
+  }),
+});
+
+export const addNewCard = ({
+  name,
+  link,
+}) => fetch(`${config.baseUrl}/cards`, {
+  method: 'POST',
+  headers,
+  body: JSON.stringify({
+    name,
+    link,
   }),
 });
