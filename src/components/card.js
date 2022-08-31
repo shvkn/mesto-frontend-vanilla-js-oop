@@ -43,9 +43,9 @@ const removeCard = (e) => {
 export const createCardNode = ({
   heading,
   imageLink,
-  likes = 0,
   id,
-  ownCard,
+  likes = 0,
+  ownCard = false,
   liked = false,
 }) => {
   const card = cardTemplate.content.querySelector('.card')

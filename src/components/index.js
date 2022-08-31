@@ -140,16 +140,19 @@ newCardFormEl.addEventListener('submit', formNewCardSubmitHandler);
 
 const renderCards = (cards = []) => {
   const profileId = getProfileId();
+  console.log('profileId', profileId);
   cards.slice()
     .reverse()
     .forEach((cardObj) => {
+      console.log('includes', cardObj.likes);
+
       const cardNode = createCardNode({
         heading: cardObj.name,
         imageLink: cardObj.link,
         likes: cardObj.likes.length,
         id: cardObj._id,
         ownCard: (profileId === cardObj.owner._id),
-        liked: (cardObj.likes.includes(profileId)),
+        liked: (cardObj.likes.find((user) => user._id === profileId)),
       });
       addCardToContainer(cardNode, cardsContainerEl);
     });
