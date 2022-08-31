@@ -44,3 +44,9 @@ export const addNewCard = ({
     link,
   }),
 });
+
+export const deleteCard = (id) => fetch(`${config.baseUrl}/cards/${id}`, {
+  method: 'DELETE',
+  headers,
+  body: JSON.stringify({ _id: id }),
+});

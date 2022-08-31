@@ -50,10 +50,14 @@ function setAvatar({
 function renderUserData({
   name,
   about,
+  id,
 }) {
+  profileEl.dataset.id = id;
   profileNameEl.textContent = name;
   profileCaptionEl.textContent = about;
 }
+
+const getProfileId = () => profileEl.dataset.id;
 
 const updateProfileData = ({
   name,
@@ -135,14 +139,19 @@ profileFormEl.addEventListener('submit', profileFormSubmitHandler);
 newCardFormEl.addEventListener('submit', formNewCardSubmitHandler);
 
 const renderCards = (cards = []) => {
-  cards.slice().reverse().forEach((cardObj) => {
-    const cardNode = createCardNode({
-      heading: cardObj.name,
-      imageLink: cardObj.link,
-      likes: cardObj.likes.length,
+  const profileId = getProfileId();
+  cards.slice()
+    .reverse()
+    .forEach((cardObj) => {
+      const cardNode = createCardNode({
+        heading: cardObj.name,
+        imageLink: cardObj.link,
+        likes: cardObj.likes.length,
+        id: cardObj._id,
+        ownCard: (profileId === cardObj.owner._id),
+      });
+      addCardToContainer(cardNode, cardsContainerEl);
     });
-    addCardToContainer(cardNode, cardsContainerEl);
-  });
 };
 
 enableValidation({
@@ -161,6 +170,7 @@ fetchUserInfo()
     renderUserData({
       name: user.name,
       about: user.about,
+      id: user._id,
     });
     setAvatar({
       avatar: user.avatar,

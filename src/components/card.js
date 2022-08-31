@@ -1,4 +1,5 @@
 import { openImageModal } from './modal';
+import { deleteCard } from './api';
 
 const cardTemplate = document.querySelector('#card-template');
 
@@ -7,14 +8,20 @@ const setLike = (e) => {
 };
 
 const removeCard = (e) => {
-  e.target.closest('.card')
-    .remove();
+  const { id } = e.target.dataset;
+  deleteCard(id)
+    .then(() => {
+      e.target.closest('.card')
+        .remove();
+    });
 };
 
 export const createCardNode = ({
   heading,
   imageLink,
-  likes=0,
+  likes = 0,
+  id,
+  ownCard,
 }) => {
   const card = cardTemplate.content.querySelector('.card')
     .cloneNode(true);
@@ -28,7 +35,12 @@ export const createCardNode = ({
   cardHeading.textContent = heading;
   cardLikes.textContent = likes;
   cardLikeButton.addEventListener('click', setLike);
-  cardRemoveButton.addEventListener('click', removeCard);
+  if (ownCard) {
+    cardRemoveButton.addEventListener('click', removeCard);
+    cardRemoveButton.dataset.id = id;
+  } else {
+    cardRemoveButton.setAttribute('disabled', '');
+  }
   cardImage.addEventListener('click', () => openImageModal(imageLink, heading));
   return card;
 };
