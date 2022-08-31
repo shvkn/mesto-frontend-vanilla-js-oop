@@ -14,6 +14,7 @@ const removeCard = (e) => {
 export const createCardNode = ({
   heading,
   imageLink,
+  likes=0,
 }) => {
   const card = cardTemplate.content.querySelector('.card')
     .cloneNode(true);
@@ -21,10 +22,11 @@ export const createCardNode = ({
   const cardHeading = card.querySelector('.card__heading');
   const cardLikeButton = card.querySelector('.card__like-button');
   const cardRemoveButton = card.querySelector('.card__remove-button');
-
+  const cardLikes = card.querySelector('.card__like-counter');
   cardImage.src = imageLink;
   cardImage.alt = heading;
   cardHeading.textContent = heading;
+  cardLikes.textContent = likes;
   cardLikeButton.addEventListener('click', setLike);
   cardRemoveButton.addEventListener('click', removeCard);
   cardImage.addEventListener('click', () => openImageModal(imageLink, heading));

@@ -43,6 +43,8 @@
 @import "../blocks/card/__image/card__image.css";
 @import "../blocks/card/__heading/card__heading.css";
 @import "../blocks/card/__panel/card__panel.css";
+@import "../blocks/card/__like/card__like.css";
+@import "../blocks/card/__like-counter/card__likes-counter.css";
 @import "../blocks/card/__like-button/card__like-button.css";
 @import "../blocks/card/__like-button/_active/card__like-button_active.css";
 @import "../blocks/card/__remove-button/card__remove-button.css";
