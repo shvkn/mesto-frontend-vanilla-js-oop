@@ -149,6 +149,7 @@ const renderCards = (cards = []) => {
         likes: cardObj.likes.length,
         id: cardObj._id,
         ownCard: (profileId === cardObj.owner._id),
+        liked: (cardObj.likes.includes(profileId)),
       });
       addCardToContainer(cardNode, cardsContainerEl);
     });

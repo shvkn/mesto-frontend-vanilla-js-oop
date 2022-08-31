@@ -50,3 +50,15 @@ export const deleteCard = (id) => fetch(`${config.baseUrl}/cards/${id}`, {
   headers,
   body: JSON.stringify({ _id: id }),
 });
+
+export const likeCard = (id) => fetch(`${config.baseUrl}/cards/likes/${id}`, {
+  method: 'PUT',
+  headers,
+  body: JSON.stringify({ _id: id }),
+});
+
+export const unlikeCard = (id) => fetch(`${config.baseUrl}/cards/likes/${id}`, {
+  method: 'DELETE',
+  headers,
+  body: JSON.stringify({ _id: id }),
+});
