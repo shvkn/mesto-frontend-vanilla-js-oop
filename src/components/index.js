@@ -3,7 +3,7 @@ import { createCardNode } from './card';
 import { closeModal, openModal } from './modal';
 import { clearForm, initModals } from './utils';
 import {
-  addNewCard, fetchCards, fetchUserInfo, updateAvatar, updateUserData,
+  createCard, fetchCards, fetchUserInfo, updateAvatar, updateUserData,
 } from './api';
 
 const cardsContainerEl = document.querySelector('.cards');
@@ -73,7 +73,6 @@ const updateProfileData = ({
   name,
   about,
 })
-  .then((userData) => userData.json())
   .then((userData) => {
     renderUserData({
       name: userData.name,
@@ -133,11 +132,10 @@ const formNewCardSubmitHandler = (e) => {
   const link = newCardFormImageLinkEl.value;
   const prevText = newCardFormSubmitEl.textContent;
   switchText(newCardFormSubmitEl, 'Сохранение...');
-  addNewCard({
+  createCard({
     name,
     link,
   })
-    .then((card) => card.json())
     .then((card) => {
       const cardNode = createCardNode({
         heading: card.name,
@@ -162,7 +160,6 @@ const avatarSubmitHandler = (e) => {
   const prevText = avatarSubmitButton.textContent;
   switchText(avatarSubmitButton, 'Сохранение...');
   updateAvatar(avatarLink)
-    .then((res) => res.json())
     .then((user) => {
       setAvatar({
         avatar: user.avatar,
@@ -189,7 +186,6 @@ const renderCards = (cards = []) => {
   cards.slice()
     .reverse()
     .forEach((cardObj) => {
-
       const cardNode = createCardNode({
         heading: cardObj.name,
         imageLink: cardObj.link,
