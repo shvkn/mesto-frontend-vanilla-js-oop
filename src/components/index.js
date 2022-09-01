@@ -69,19 +69,17 @@ const getProfileId = () => profileEl.dataset.id;
 const updateProfileData = ({
   name,
   about,
-}) => {
-  updateUserData({
-    name,
-    about,
-  })
-    .then((userData) => userData.json())
-    .then((userData) => {
-      renderUserData({
-        name: userData.name,
-        about: userData.about,
-      });
+}) => updateUserData({
+  name,
+  about,
+})
+  .then((userData) => userData.json())
+  .then((userData) => {
+    renderUserData({
+      name: userData.name,
+      about: userData.about,
     });
-};
+  });
 
 const profileEditButtonHandler = () => {
   clearForm({
@@ -95,13 +93,22 @@ const profileEditButtonHandler = () => {
   deactivateButton(profileFormSubmitEl, inactiveButtonClass);
 };
 
+const switchText = (element, text) => {
+  element.textContent = text;
+};
+
 const profileFormSubmitHandler = (e) => {
   e.preventDefault();
+  const prevText = profileFormSubmitEl.textContent;
+  switchText(profileFormSubmitEl, 'Сохранение...');
   updateProfileData({
     name: profileFormNameEl.value,
     about: profileFormCaptionEl.value,
-  });
-  closeModal(modalProfileEl);
+  })
+    .finally(() => {
+      switchText(profileFormSubmitEl, prevText);
+      closeModal(modalProfileEl);
+    });
 };
 
 const newCardButtonHandler = () => {
@@ -124,7 +131,8 @@ const formNewCardSubmitHandler = (e) => {
 
   const name = newCardFormHeadingEl.value;
   const link = newCardFormImageLinkEl.value;
-
+  const prevText = newCardFormSubmitEl.textContent;
+  switchText(newCardFormSubmitEl, 'Сохранение...');
   addNewCard({
     name,
     link,
@@ -134,8 +142,12 @@ const formNewCardSubmitHandler = (e) => {
       const cardNode = createCardNode({
         heading: card.name,
         imageLink: card.link,
+        ownCard: true,
       });
       addCardToContainer(cardNode, cardsContainerEl);
+    })
+    .finally(() => {
+      switchText(newCardFormSubmitEl, prevText);
       closeModal(modalNewCardEl);
     });
 };
@@ -147,6 +159,8 @@ const avatarButtonHandler = () => {
 const avatarSubmitHandler = (e) => {
   e.preventDefault();
   const avatarLink = avatarFormLink.value;
+  const prevText = avatarSubmitButton.textContent;
+  switchText(avatarSubmitButton, 'Сохранение...');
   updateAvatar(avatarLink)
     .then((res) => res.json())
     .then((user) => {
@@ -154,6 +168,9 @@ const avatarSubmitHandler = (e) => {
         avatar: user.avatar,
         alt: user.name,
       });
+    })
+    .finally(() => {
+      switchText(avatarSubmitButton, prevText);
       closeModal(modalAvatarEl);
     });
 };
@@ -168,11 +185,10 @@ newCardFormEl.addEventListener('submit', formNewCardSubmitHandler);
 
 const renderCards = (cards = []) => {
   const profileId = getProfileId();
-  console.log('profileId', profileId);
+
   cards.slice()
     .reverse()
     .forEach((cardObj) => {
-      console.log('includes', cardObj.likes);
 
       const cardNode = createCardNode({
         heading: cardObj.name,
