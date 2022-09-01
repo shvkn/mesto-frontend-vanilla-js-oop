@@ -62,3 +62,9 @@ export const unlikeCard = (id) => fetch(`${config.baseUrl}/cards/likes/${id}`, {
   headers,
   body: JSON.stringify({ _id: id }),
 });
+
+export const updateAvatar = (avatar) => fetch(`${config.baseUrl}/users/me/avatar`, {
+  method: 'PATCH',
+  headers,
+  body: JSON.stringify({ avatar }),
+});
