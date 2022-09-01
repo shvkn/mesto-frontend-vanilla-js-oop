@@ -16,14 +16,12 @@ const likeButtonHandler = (e) => {
 
   if (liked) {
     unlikeCard(id)
-      .then((card) => card.json())
       .then((card) => {
         e.target.classList.remove(cardLikeButtonActiveClass);
         likeContainer.textContent = card.likes.length;
       });
   } else {
     likeCard(id)
-      .then((card) => card.json())
       .then((card) => {
         e.target.classList.add(cardLikeButtonActiveClass);
         likeContainer.textContent = card.likes.length;
