@@ -3,7 +3,7 @@ import { createCardNode } from './card';
 import { closeModal, openModal } from './modal';
 import { clearForm, initModals } from './utils';
 import {
-  addNewCard, fetchCards, fetchUserInfo, updateUserData,
+  addNewCard, fetchCards, fetchUserInfo, updateAvatar, updateUserData,
 } from './api';
 
 const cardsContainerEl = document.querySelector('.cards');
@@ -25,7 +25,14 @@ const profileEl = document.querySelector('.profile');
 const profileEditButtonEl = profileEl.querySelector('.profile__edit-button');
 const profileNameEl = profileEl.querySelector('.profile__name');
 const profileCaptionEl = profileEl.querySelector('.profile__caption');
-const profileAvatarEl = profileEl.querySelector('.profile__avatar');
+
+const profileAvatarImageEl = profileEl.querySelector('.profile__avatar-image');
+const profileAvatarButton = profileEl.querySelector('.profile__avatar-change-button');
+
+const modalAvatarEl = document.querySelector('#modal-avatar');
+const avatarFormEl = modalAvatarEl.querySelector('#form-avatar');
+const avatarFormLink = avatarFormEl.querySelector('#avatar-link');
+const avatarSubmitButton = avatarFormEl.querySelector('.form__submit');
 
 const formSelectorClass = '.form';
 const inputSelectorClass = '.form__input';
@@ -43,8 +50,8 @@ function setAvatar({
   avatar,
   alt,
 }) {
-  profileAvatarEl.src = avatar;
-  profileAvatarEl.alt = alt;
+  profileAvatarImageEl.src = avatar;
+  profileAvatarImageEl.alt = alt;
 }
 
 function renderUserData({
@@ -132,6 +139,27 @@ const formNewCardSubmitHandler = (e) => {
       closeModal(modalNewCardEl);
     });
 };
+
+const avatarButtonHandler = () => {
+  openModal(modalAvatarEl);
+};
+
+const avatarSubmitHandler = (e) => {
+  e.preventDefault();
+  const avatarLink = avatarFormLink.value;
+  updateAvatar(avatarLink)
+    .then((res) => res.json())
+    .then((user) => {
+      setAvatar({
+        avatar: user.avatar,
+        alt: user.name,
+      });
+      closeModal(modalAvatarEl);
+    });
+};
+
+profileAvatarButton.addEventListener('click', avatarButtonHandler);
+avatarFormEl.addEventListener('submit', avatarSubmitHandler);
 
 profileEditButtonEl.addEventListener('click', profileEditButtonHandler);
 addCardButtonEl.addEventListener('click', newCardButtonHandler);

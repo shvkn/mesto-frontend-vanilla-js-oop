@@ -18,7 +18,10 @@
   <main class="content-layout">
 
     <section class="profile">
-      <img class="profile__avatar" src="">
+      <div class="profile__avatar">
+        <button class="profile__avatar-change-button"></button>
+        <img src="" alt="" class="profile__avatar-image">
+      </div>
       <div class="profile__info">
         <h1 class="profile__name" aria-label="Профиль пользователя"></h1>
         <button class="button profile__edit-button" type="button" aria-label="Редактировать профиль"></button>
@@ -118,6 +121,29 @@
     <h2 class="modal__heading modal__heading_type_image"></h2>
     <img class="modal__cover-image" src="" alt="sss">
     <button class="button modal__close-button" type="button" aria-label="Закрыть окно"></button>
+  </div>
+</div>
+
+<div class="modal" id="modal-avatar">
+  <div class="modal__container">
+    <form class="form" action="#" name="form-avatar" id="form-avatar" novalidate>
+      <button class="button modal__close-button" type="reset" aria-label="Закрыть окно"></button>
+      <h2 class="modal__heading">Обновить аватар</h2>
+      <fieldset class="form__fieldset">
+
+        <input class="form__input"
+               type="url"
+               name="avatar-link"
+               id="avatar-link"
+               placeholder="Ссылка на картинку"
+               aria-label="Введите ссылку на картинку"
+               required>
+
+        <span class="avatar-link-error form__input-error"></span>
+
+      </fieldset>
+      <button class="button form__submit" type="submit" aria-label="Обновить аватар">Сохранить</button>
+    </form>
   </div>
 </div>
 
