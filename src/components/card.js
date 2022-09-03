@@ -1,8 +1,11 @@
-import { openImageModal } from './modal';
+import {
+  closeModal, messageModal, openImageModal, openModal,
+} from './modal';
 import { deleteCard, likeCard, unlikeCard } from './api';
 
 const cardTemplate = document.querySelector('#card-template');
 const cardLikeButtonActiveClass = 'card__like-button_active';
+const modalConfirm = document.querySelector('#modal-message');
 
 const likeButtonHandler = (e) => {
   const {
@@ -30,11 +33,18 @@ const likeButtonHandler = (e) => {
 };
 
 const removeCard = (e) => {
-  const { id } = e.target.dataset;
-  deleteCard(id)
-    .then(() => {
-      e.target.closest('.card')
-        .remove();
+  openModal(modalConfirm);
+  messageModal(modalConfirm, 'Вы уверены?')
+    .then((confirm) => {
+      if (confirm === 'yes') {
+        const { id } = e.target.dataset;
+        deleteCard(id)
+          .then(() => {
+            e.target.closest('.card')
+              .remove();
+          });
+        closeModal(modalConfirm);
+      }
     });
 };
 

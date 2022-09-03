@@ -19,6 +19,17 @@ export const openModal = (modal) => {
   document.addEventListener('keydown', closeByEsc);
 };
 
+export const messageModal = (modal, text) => {
+  modal.querySelector('.modal__heading').textContent = text;
+  const confirmButton = modal.querySelector('.form__submit');
+  return new Promise((resolve) => {
+    confirmButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      resolve('yes');
+    });
+  });
+};
+
 function fillImageData({
   imageSrc,
   headingText,
