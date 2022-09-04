@@ -104,9 +104,11 @@ const profileFormSubmitHandler = (e) => {
     name: profileFormNameEl.value,
     about: profileFormCaptionEl.value,
   })
+    .then(() => {
+      closeModal(modalProfileEl);
+    })
     .finally(() => {
       switchText(profileFormSubmitEl, prevText);
-      closeModal(modalProfileEl);
     });
 };
 
@@ -144,10 +146,10 @@ const formNewCardSubmitHandler = (e) => {
         ownCard: true,
       });
       addCardToContainer(cardNode, cardsContainerEl);
+      closeModal(modalNewCardEl);
     })
     .finally(() => {
       switchText(newCardFormSubmitEl, prevText);
-      closeModal(modalNewCardEl);
     });
 };
 
@@ -166,10 +168,10 @@ const avatarSubmitHandler = (e) => {
         avatar: user.avatar,
         alt: user.name,
       });
+      closeModal(modalAvatarEl);
     })
     .finally(() => {
       switchText(avatarSubmitButton, prevText);
-      closeModal(modalAvatarEl);
     });
 };
 
