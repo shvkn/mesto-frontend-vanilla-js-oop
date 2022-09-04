@@ -21,20 +21,20 @@ export const openModal = (modal) => {
 
 export const getConfirm = (modal, handleSubmit) => {
   const confirmForm = modal.querySelector('.form');
-  const listenerHandler = (e) => {
+  const handleConfirm = (e) => {
     e.preventDefault();
     handleSubmit();
   };
   let isSubscribed = false;
-  const checkModalInterval = setInterval(() => {
+  const openedModalCheckInterval = setInterval(() => {
     if (modal.classList.contains('modal_opened')) {
       if (!isSubscribed) {
-        confirmForm.addEventListener('submit', listenerHandler);
+        confirmForm.addEventListener('submit', handleConfirm);
         isSubscribed = true;
       }
     } else {
-      confirmForm.removeEventListener('submit', listenerHandler);
-      clearInterval(checkModalInterval);
+      confirmForm.removeEventListener('submit', handleConfirm);
+      clearInterval(openedModalCheckInterval);
     }
   });
 };

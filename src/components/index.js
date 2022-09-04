@@ -81,7 +81,7 @@ const updateProfileData = ({
   })
   .catch((error) => console.log(error));
 
-const onProfileEditButtonClick = () => {
+const handleProfileEditButtonClick = () => {
   clearForm({
     formElement: profileFormEl,
     inputSelectorClass,
@@ -97,7 +97,7 @@ const switchText = (element, text) => {
   element.textContent = text;
 };
 
-const onProfileFormSubmit = (e) => {
+const handleProfileFormSubmit = (e) => {
   e.preventDefault();
   const prevText = profileFormSubmitEl.textContent;
   switchText(profileFormSubmitEl, 'Сохранение...');
@@ -112,7 +112,7 @@ const onProfileFormSubmit = (e) => {
     });
 };
 
-const onNewCardButtonClick = () => {
+const handleNewCardButtonClick = () => {
   clearForm({
     formElement: newCardFormEl,
     inputSelectorClass,
@@ -127,7 +127,7 @@ const addCardToContainer = (card, container) => {
   container.prepend(card);
 };
 
-const onNewCardFormSubmit = (e) => {
+const handleNewCardFormSubmit = (e) => {
   e.preventDefault();
   const name = newCardFormHeadingEl.value;
   const link = newCardFormImageLinkEl.value;
@@ -153,11 +153,11 @@ const onNewCardFormSubmit = (e) => {
     });
 };
 
-const onAvatarChangeButtonClick = () => {
+const handleAvatarChangeButtonClick = () => {
   openModal(modalAvatarEl);
 };
 
-const onAvatarFormSubmit = (e) => {
+const handleAvatarFormSubmit = (e) => {
   e.preventDefault();
   const avatarLink = avatarFormLink.value;
   const prevText = avatarSubmitButton.textContent;
@@ -176,15 +176,15 @@ const onAvatarFormSubmit = (e) => {
     });
 };
 
-profileAvatarButton.addEventListener('click', onAvatarChangeButtonClick);
-avatarFormEl.addEventListener('submit', onAvatarFormSubmit);
+profileAvatarButton.addEventListener('click', handleAvatarChangeButtonClick);
+avatarFormEl.addEventListener('submit', handleAvatarFormSubmit);
 
-profileEditButtonEl.addEventListener('click', onProfileEditButtonClick);
-addCardButtonEl.addEventListener('click', onNewCardButtonClick);
-profileFormEl.addEventListener('submit', onProfileFormSubmit);
-newCardFormEl.addEventListener('submit', onNewCardFormSubmit);
+profileEditButtonEl.addEventListener('click', handleProfileEditButtonClick);
+addCardButtonEl.addEventListener('click', handleNewCardButtonClick);
+profileFormEl.addEventListener('submit', handleProfileFormSubmit);
+newCardFormEl.addEventListener('submit', handleNewCardFormSubmit);
 
-const renderCards = (cards = []) => {
+const renderCards = (cards) => {
   const profileId = getProfileId();
 
   cards.slice()
@@ -213,8 +213,11 @@ enableValidation({
 
 initModals();
 
-fetchUserInfo()
-  .then((user) => {
+Promise.all([
+  fetchUserInfo(),
+  fetchCards(),
+])
+  .then(([user, cards]) => {
     renderUserData({
       name: user.name,
       about: user.about,
@@ -224,9 +227,6 @@ fetchUserInfo()
       avatar: user.avatar,
       alt: user.name,
     });
-  })
-  .then(() => {
-    fetchCards()
-      .then(renderCards);
+    renderCards(cards);
   })
   .catch((error) => console.log(error));
