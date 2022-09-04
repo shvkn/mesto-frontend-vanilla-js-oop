@@ -1,17 +1,14 @@
 import {
-  closeModal, messageModal, openImageModal, openModal,
+  closeModal, confirmModal, openImageModal, openModal,
 } from './modal';
 import { deleteCard, likeCard, unlikeCard } from './api';
 
 const cardTemplate = document.querySelector('#card-template');
 const cardLikeButtonActiveClass = 'card__like-button_active';
-const modalConfirm = document.querySelector('#modal-message');
+const modalConfirm = document.querySelector('#modal-confirm');
 
 const likeButtonHandler = (e) => {
-  const {
-
-    id,
-  } = e.target.dataset;
+  const { id } = e.target.dataset;
   const likeContainer = e.target.closest('.card')
     .querySelector('.card__like-counter');
 
@@ -34,18 +31,15 @@ const likeButtonHandler = (e) => {
 
 const removeCard = (e) => {
   openModal(modalConfirm);
-  messageModal(modalConfirm, 'Вы уверены?')
-    .then((confirm) => {
-      if (confirm === 'yes') {
-        const { id } = e.target.dataset;
-        deleteCard(id)
-          .then(() => {
-            e.target.closest('.card')
-              .remove();
-          });
+  confirmModal(modalConfirm, () => {
+    const { id } = e.target.dataset;
+    deleteCard(id)
+      .then(() => {
+        e.target.closest('.card')
+          .remove();
         closeModal(modalConfirm);
-      }
-    });
+      });
+  });
 };
 
 export const createCardNode = ({
