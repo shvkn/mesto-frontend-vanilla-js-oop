@@ -140,6 +140,7 @@ const formNewCardSubmitHandler = (e) => {
       const cardNode = createCardNode({
         heading: card.name,
         imageLink: card.link,
+        id: card._id,
         ownCard: true,
       });
       addCardToContainer(cardNode, cardsContainerEl);
@@ -185,14 +186,14 @@ const renderCards = (cards = []) => {
 
   cards.slice()
     .reverse()
-    .forEach((cardObj) => {
+    .forEach((card) => {
       const cardNode = createCardNode({
-        heading: cardObj.name,
-        imageLink: cardObj.link,
-        likes: cardObj.likes.length,
-        id: cardObj._id,
-        ownCard: (profileId === cardObj.owner._id),
-        liked: (cardObj.likes.find((user) => user._id === profileId)),
+        heading: card.name,
+        imageLink: card.link,
+        likes: card.likes.length,
+        id: card._id,
+        ownCard: (profileId === card.owner._id),
+        liked: (card.likes.find((user) => user._id === profileId)),
       });
       addCardToContainer(cardNode, cardsContainerEl);
     });
@@ -220,7 +221,8 @@ fetchUserInfo()
       avatar: user.avatar,
       alt: user.name,
     });
+  })
+  .then(() => {
+    fetchCards()
+      .then(renderCards);
   });
-
-fetchCards()
-  .then(renderCards);
