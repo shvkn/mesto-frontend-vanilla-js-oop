@@ -1,30 +1,27 @@
 import {
-  closeModal, messageModal, openImageModal, openModal,
+  closeModal, getConfirm, openImageModal, openModal,
 } from './modal';
-import { deleteCard, likeCard, unlikeCard } from './api';
+import { deleteCard, setLike, unsetLike } from './api';
 
 const cardTemplate = document.querySelector('#card-template');
 const cardLikeButtonActiveClass = 'card__like-button_active';
-const modalConfirm = document.querySelector('#modal-message');
+const modalConfirm = document.querySelector('#modal-confirm');
 
-const likeButtonHandler = (e) => {
-  const {
-
-    id,
-  } = e.target.dataset;
+const onLikeButtonClick = (e) => {
+  const { id } = e.target.dataset;
   const likeContainer = e.target.closest('.card')
     .querySelector('.card__like-counter');
 
   const liked = e.target.classList.contains(cardLikeButtonActiveClass);
 
   if (liked) {
-    unlikeCard(id)
+    unsetLike(id)
       .then((card) => {
         e.target.classList.remove(cardLikeButtonActiveClass);
         likeContainer.textContent = card.likes.length;
       });
   } else {
-    likeCard(id)
+    setLike(id)
       .then((card) => {
         e.target.classList.add(cardLikeButtonActiveClass);
         likeContainer.textContent = card.likes.length;
@@ -32,20 +29,18 @@ const likeButtonHandler = (e) => {
   }
 };
 
-const removeCard = (e) => {
+const onRemoveCardClick = (e) => {
   openModal(modalConfirm);
-  messageModal(modalConfirm, 'Вы уверены?')
-    .then((confirm) => {
-      if (confirm === 'yes') {
-        const { id } = e.target.dataset;
-        deleteCard(id)
-          .then(() => {
-            e.target.closest('.card')
-              .remove();
-          });
+  getConfirm(modalConfirm, () => {
+    const { id } = e.target.dataset;
+    deleteCard(id)
+      .then(() => {
+        e.target.closest('.card')
+          .remove();
         closeModal(modalConfirm);
-      }
-    });
+      })
+      .catch((error) => console.log(error));
+  });
 };
 
 export const createCardNode = ({
@@ -67,14 +62,14 @@ export const createCardNode = ({
   cardImage.alt = heading;
   cardHeading.textContent = heading;
   cardLikes.textContent = likes;
-  cardLikeButton.addEventListener('click', likeButtonHandler);
+  cardLikeButton.addEventListener('click', onLikeButtonClick);
   cardLikeButton.dataset.id = id;
 
   if (liked) {
     cardLikeButton.classList.add(cardLikeButtonActiveClass);
   }
   if (ownCard) {
-    cardRemoveButton.addEventListener('click', removeCard);
+    cardRemoveButton.addEventListener('click', onRemoveCardClick);
     cardRemoveButton.dataset.id = id;
   } else {
     cardRemoveButton.setAttribute('disabled', '');

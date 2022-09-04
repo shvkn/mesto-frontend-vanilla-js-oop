@@ -1,23 +1,25 @@
 {
-  "name": "how-to-learn-plus",
+  "name": "mesto",
   "version": "1.0.0",
-  "description": "1. Первый бриф [pdf](https://code.s3.yandex.net/web-plus/project-1/sprint-1-brief.pdf) 2. Второй бриф [pdf](https://code.s3.yandex.net/web-plus/project-1/sprint-2-brief.pdf)",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
-    "dev": "webpack serve"
+    "dev": "webpack serve",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shvkn/how-to-learn-plus.git"
+    "url": "git+https://github.com/shvkn/mstp.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/shvkn/how-to-learn-plus/issues"
+    "url": "https://github.com/shvkn/mstp/issues"
   },
-  "homepage": "https://github.com/shvkn/how-to-learn-plus#readme",
+  "homepage": "https://github.com/shvkn/mstp#readme",
   "devDependencies": {
     "@babel/core": "^7.18.10",
     "@babel/preset-env": "^7.18.10",
@@ -32,6 +34,7 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "gh-pages": "^4.0.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.1",
     "postcss-loader": "^7.0.1",

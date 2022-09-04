@@ -78,9 +78,10 @@ const updateProfileData = ({
       name: userData.name,
       about: userData.about,
     });
-  });
+  })
+  .catch((error) => console.log(error));
 
-const profileEditButtonHandler = () => {
+const onProfileEditButtonClick = () => {
   clearForm({
     formElement: profileFormEl,
     inputSelectorClass,
@@ -96,7 +97,7 @@ const switchText = (element, text) => {
   element.textContent = text;
 };
 
-const profileFormSubmitHandler = (e) => {
+const onProfileFormSubmit = (e) => {
   e.preventDefault();
   const prevText = profileFormSubmitEl.textContent;
   switchText(profileFormSubmitEl, 'Сохранение...');
@@ -104,13 +105,14 @@ const profileFormSubmitHandler = (e) => {
     name: profileFormNameEl.value,
     about: profileFormCaptionEl.value,
   })
+    .then(() => closeModal(modalProfileEl))
+    .catch((error) => console.log(error))
     .finally(() => {
       switchText(profileFormSubmitEl, prevText);
-      closeModal(modalProfileEl);
     });
 };
 
-const newCardButtonHandler = () => {
+const onNewCardButtonClick = () => {
   clearForm({
     formElement: newCardFormEl,
     inputSelectorClass,
@@ -125,9 +127,8 @@ const addCardToContainer = (card, container) => {
   container.prepend(card);
 };
 
-const formNewCardSubmitHandler = (e) => {
+const onNewCardFormSubmit = (e) => {
   e.preventDefault();
-
   const name = newCardFormHeadingEl.value;
   const link = newCardFormImageLinkEl.value;
   const prevText = newCardFormSubmitEl.textContent;
@@ -144,18 +145,19 @@ const formNewCardSubmitHandler = (e) => {
         ownCard: true,
       });
       addCardToContainer(cardNode, cardsContainerEl);
+      closeModal(modalNewCardEl);
     })
+    .catch((error) => console.log(error))
     .finally(() => {
       switchText(newCardFormSubmitEl, prevText);
-      closeModal(modalNewCardEl);
     });
 };
 
-const avatarButtonHandler = () => {
+const onAvatarChangeButtonClick = () => {
   openModal(modalAvatarEl);
 };
 
-const avatarSubmitHandler = (e) => {
+const onAvatarFormSubmit = (e) => {
   e.preventDefault();
   const avatarLink = avatarFormLink.value;
   const prevText = avatarSubmitButton.textContent;
@@ -166,20 +168,21 @@ const avatarSubmitHandler = (e) => {
         avatar: user.avatar,
         alt: user.name,
       });
+      closeModal(modalAvatarEl);
     })
+    .catch((error) => console.log(error))
     .finally(() => {
       switchText(avatarSubmitButton, prevText);
-      closeModal(modalAvatarEl);
     });
 };
 
-profileAvatarButton.addEventListener('click', avatarButtonHandler);
-avatarFormEl.addEventListener('submit', avatarSubmitHandler);
+profileAvatarButton.addEventListener('click', onAvatarChangeButtonClick);
+avatarFormEl.addEventListener('submit', onAvatarFormSubmit);
 
-profileEditButtonEl.addEventListener('click', profileEditButtonHandler);
-addCardButtonEl.addEventListener('click', newCardButtonHandler);
-profileFormEl.addEventListener('submit', profileFormSubmitHandler);
-newCardFormEl.addEventListener('submit', formNewCardSubmitHandler);
+profileEditButtonEl.addEventListener('click', onProfileEditButtonClick);
+addCardButtonEl.addEventListener('click', onNewCardButtonClick);
+profileFormEl.addEventListener('submit', onProfileFormSubmit);
+newCardFormEl.addEventListener('submit', onNewCardFormSubmit);
 
 const renderCards = (cards = []) => {
   const profileId = getProfileId();
@@ -226,6 +229,4 @@ fetchUserInfo()
     fetchCards()
       .then(renderCards);
   })
-  .catch((errorMessage) => {
-    console.log(errorMessage);
-  });
+  .catch((error) => console.log(error));
