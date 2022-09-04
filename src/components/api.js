@@ -8,7 +8,7 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
-const response = (res) => {
+const processResponse = (res) => {
   if (res.status === 200) {
     return res.json();
   }
@@ -19,13 +19,13 @@ export const fetchUserInfo = () => fetch(
   `${config.baseUrl}/users/me`,
   { headers },
 )
-  .then((res) => response(res));
+  .then((res) => processResponse(res));
 
 export const fetchCards = () => fetch(
   `${config.baseUrl}/cards`,
   { headers },
 )
-  .then((res) => response(res));
+  .then((res) => processResponse(res));
 
 export const updateUserData = ({
   name,
@@ -41,7 +41,7 @@ export const updateUserData = ({
     }),
   },
 )
-  .then(response);
+  .then(processResponse);
 
 export const createCard = ({
   name,
@@ -57,7 +57,7 @@ export const createCard = ({
     }),
   },
 )
-  .then(response);
+  .then(processResponse);
 
 export const deleteCard = (id) => fetch(
   `${config.baseUrl}/cards/${id}`,
@@ -67,9 +67,9 @@ export const deleteCard = (id) => fetch(
     body: JSON.stringify({ _id: id }),
   },
 )
-  .then(response);
+  .then(processResponse);
 
-export const likeCard = (id) => fetch(
+export const setLike = (id) => fetch(
   `${config.baseUrl}/cards/likes/${id}`,
   {
     method: 'PUT',
@@ -77,9 +77,9 @@ export const likeCard = (id) => fetch(
     body: JSON.stringify({ _id: id }),
   },
 )
-  .then(response);
+  .then(processResponse);
 
-export const unlikeCard = (id) => fetch(
+export const unsetLike = (id) => fetch(
   `${config.baseUrl}/cards/likes/${id}`,
   {
     method: 'DELETE',
@@ -87,7 +87,7 @@ export const unlikeCard = (id) => fetch(
     body: JSON.stringify({ _id: id }),
   },
 )
-  .then(response);
+  .then(processResponse);
 
 export const updateAvatar = (avatar) => fetch(
   `${config.baseUrl}/users/me/avatar`,
@@ -97,4 +97,4 @@ export const updateAvatar = (avatar) => fetch(
     body: JSON.stringify({ avatar }),
   },
 )
-  .then(response);
+  .then(processResponse);
