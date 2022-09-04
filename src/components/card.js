@@ -19,13 +19,16 @@ const onLikeButtonClick = (e) => {
       .then((card) => {
         e.target.classList.remove(cardLikeButtonActiveClass);
         likeContainer.textContent = card.likes.length;
-      });
+      })
+      .catch((error) => console.log(error));
   } else {
     setLike(id)
       .then((card) => {
         e.target.classList.add(cardLikeButtonActiveClass);
         likeContainer.textContent = card.likes.length;
-      });
+      })
+      .catch((error) => console.log(error));
+    ;
   }
 };
 
