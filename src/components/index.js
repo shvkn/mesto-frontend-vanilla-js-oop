@@ -78,6 +78,9 @@ const updateProfileData = ({
       name: userData.name,
       about: userData.about,
     });
+  })
+  .catch((error) => {
+    console.log(error);
   });
 
 const profileEditButtonHandler = () => {
@@ -106,6 +109,9 @@ const profileFormSubmitHandler = (e) => {
   })
     .then(() => {
       closeModal(modalProfileEl);
+    })
+    .catch((error) => {
+      console.log(error);
     })
     .finally(() => {
       switchText(profileFormSubmitEl, prevText);
@@ -148,6 +154,9 @@ const formNewCardSubmitHandler = (e) => {
       addCardToContainer(cardNode, cardsContainerEl);
       closeModal(modalNewCardEl);
     })
+    .catch((error) => {
+      console.log(error);
+    })
     .finally(() => {
       switchText(newCardFormSubmitEl, prevText);
     });
@@ -169,6 +178,9 @@ const avatarSubmitHandler = (e) => {
         alt: user.name,
       });
       closeModal(modalAvatarEl);
+    })
+    .catch((error) => {
+      console.log(error);
     })
     .finally(() => {
       switchText(avatarSubmitButton, prevText);
