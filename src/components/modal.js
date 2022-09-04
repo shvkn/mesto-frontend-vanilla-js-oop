@@ -19,7 +19,7 @@ export const openModal = (modal) => {
   document.addEventListener('keydown', closeByEsc);
 };
 
-export const confirmModal = (modal, handleSubmit) => {
+export const getConfirm = (modal, handleSubmit) => {
   const confirmForm = modal.querySelector('.form');
   const listenerHandler = (e) => {
     e.preventDefault();
