@@ -225,4 +225,7 @@ fetchUserInfo()
   .then(() => {
     fetchCards()
       .then(renderCards);
+  })
+  .catch((errorMessage) => {
+    console.log(errorMessage);
   });
