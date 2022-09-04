@@ -1,6 +1,0 @@
-.form__input-error {
-  min-height: 30px;
-  margin-top: 5px;
-  opacity: 0;
-  transition: opacity .5s ease-in-out;
-}
