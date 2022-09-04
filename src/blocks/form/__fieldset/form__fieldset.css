@@ -1,6 +1,6 @@
 .form__fieldset {
   display: flex;
-  padding: 45px 0 15px;
+  padding: 0 0 15px;
   margin: 0;
   border: none;
   flex-flow: column;

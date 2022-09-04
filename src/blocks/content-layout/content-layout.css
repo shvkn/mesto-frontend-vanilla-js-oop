@@ -1,12 +1,12 @@
 .content-layout {
   display: grid;
   grid-row: content;
-  grid-template-rows: 0 [profile] auto 50px [elements] auto;
+  grid-template-rows: 0 [profile] auto 52px [cards] auto;
   padding: 0 var(--inner-container-padding);
 }
 
 @media screen and (max-width: 720px) {
   .content-layout {
-    grid-template-rows: 0 [profile] auto 36px [elements] auto;
+    grid-template-rows: 0 [profile] auto 36px [cards] auto;
   }
 }

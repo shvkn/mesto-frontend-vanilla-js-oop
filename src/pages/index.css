@@ -31,6 +31,8 @@
 
 @import "../blocks/profile/profile.css";
 @import "../blocks/profile/__avatar/profile__avatar.css";
+@import "../blocks/profile/__avatar-change-button/profile__avatar-change-button.css";
+@import "../blocks/profile/__avatar-image/profile__avatar-image.css";
 @import "../blocks/profile/__edit-button/profile__edit-button.css";
 @import "../blocks/profile/__add-button/profile__add-button.css";
 @import "../blocks/profile/__info/profile__info.css";
@@ -43,6 +45,8 @@
 @import "../blocks/card/__image/card__image.css";
 @import "../blocks/card/__heading/card__heading.css";
 @import "../blocks/card/__panel/card__panel.css";
+@import "../blocks/card/__like/card__like.css";
+@import "../blocks/card/__like-counter/card__likes-counter.css";
 @import "../blocks/card/__like-button/card__like-button.css";
 @import "../blocks/card/__like-button/_active/card__like-button_active.css";
 @import "../blocks/card/__remove-button/card__remove-button.css";

@@ -18,7 +18,10 @@
   <main class="content-layout">
 
     <section class="profile">
-      <img class="profile__avatar" src="<%=require('./images/profile-avatar.jpg')%>" alt="Жак-Ив Кусто">
+      <div class="profile__avatar">
+        <button class="profile__avatar-change-button"></button>
+        <img src="" alt="" class="profile__avatar-image">
+      </div>
       <div class="profile__info">
         <h1 class="profile__name" aria-label="Профиль пользователя"></h1>
         <button class="button profile__edit-button" type="button" aria-label="Редактировать профиль"></button>
@@ -52,7 +55,7 @@
                required
                minlength="2"
                maxlength="40"
-               pattern="^[a-zA-Zа-яА-Я- ]+$"
+               pattern="^[a-zA-Zа-яА-Я \-, ]+$"
                data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
 
         <span class="profile-name-error form__input-error"></span>
@@ -66,7 +69,7 @@
                required
                minlength="2"
                maxlength="200"
-               pattern="^[a-zA-Zа-яА-Я- ]+$"
+               pattern="^[a-zA-Zа-яА-Я \-,]+$"
                data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
         <span class="profile-caption-error form__input-error"></span>
       </fieldset>
@@ -120,13 +123,48 @@
     <button class="button modal__close-button" type="button" aria-label="Закрыть окно"></button>
   </div>
 </div>
+<div class="modal" id="modal-message">
+  <div class="modal__container">
+    <form action="#" class="form" name="form-message" id="form-message">
+      <button class="button modal__close-button" type="reset" aria-label="Закрыть окно"></button>
+      <h2 class="modal__heading">Вы уверены?</h2>
+      <button class="button form__submit" type="submit" aria-label="Подтвердить">Да</button>
+
+    </form>
+  </div>
+</div>
+<div class="modal" id="modal-avatar">
+  <div class="modal__container">
+    <form class="form" action="#" name="form-avatar" id="form-avatar" novalidate>
+      <button class="button modal__close-button" type="reset" aria-label="Закрыть окно"></button>
+      <h2 class="modal__heading">Обновить аватар</h2>
+      <fieldset class="form__fieldset">
+
+        <input class="form__input"
+               type="url"
+               name="avatar-link"
+               id="avatar-link"
+               placeholder="Ссылка на картинку"
+               aria-label="Введите ссылку на картинку"
+               required>
+
+        <span class="avatar-link-error form__input-error"></span>
+
+      </fieldset>
+      <button class="button form__submit" type="submit" aria-label="Обновить аватар">Сохранить</button>
+    </form>
+  </div>
+</div>
 
 <template id="card-template">
   <figure class="card">
     <img class="card__image" src="" alt="">
     <figcaption class="card__panel">
       <h2 class="card__heading"></h2>
-      <button class="button card__like-button" type="button" aria-label="Лайкнуть место"></button>
+      <div class="card__like">
+        <button class="button card__like-button" type="button" aria-label="Лайкнуть место"></button>
+        <p class="card__like-counter"></p>
+      </div>
       <button class="button card__remove-button" type="button" aria-label="Удалить место"></button>
     </figcaption>
   </figure>

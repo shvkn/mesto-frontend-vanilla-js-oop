@@ -2,7 +2,9 @@ import { deactivateButton, enableValidation } from './validation';
 import { createCardNode } from './card';
 import { closeModal, openModal } from './modal';
 import { clearForm, initModals } from './utils';
-import { cards } from './initial-cards';
+import {
+  createCard, fetchCards, fetchUserInfo, updateAvatar, updateUserData,
+} from './api';
 
 const cardsContainerEl = document.querySelector('.cards');
 const modalNewCardEl = document.querySelector('#modal-new-card');
@@ -24,6 +26,14 @@ const profileEditButtonEl = profileEl.querySelector('.profile__edit-button');
 const profileNameEl = profileEl.querySelector('.profile__name');
 const profileCaptionEl = profileEl.querySelector('.profile__caption');
 
+const profileAvatarImageEl = profileEl.querySelector('.profile__avatar-image');
+const profileAvatarButton = profileEl.querySelector('.profile__avatar-change-button');
+
+const modalAvatarEl = document.querySelector('#modal-avatar');
+const avatarFormEl = modalAvatarEl.querySelector('#form-avatar');
+const avatarFormLink = avatarFormEl.querySelector('#avatar-link');
+const avatarSubmitButton = avatarFormEl.querySelector('.form__submit');
+
 const formSelectorClass = '.form';
 const inputSelectorClass = '.form__input';
 const submitButtonSelectorClass = '.form__submit';
@@ -36,13 +46,39 @@ const getProfileData = () => {
   profileFormCaptionEl.value = profileCaptionEl.textContent;
 };
 
-const setProfileData = ({
+function setAvatar({
+  avatar,
+  alt,
+}) {
+  profileAvatarImageEl.src = avatar;
+  profileAvatarImageEl.alt = alt;
+}
+
+function renderUserData({
   name,
-  caption,
-}) => {
+  about,
+  id,
+}) {
+  profileEl.dataset.id = id;
   profileNameEl.textContent = name;
-  profileCaptionEl.textContent = caption;
-};
+  profileCaptionEl.textContent = about;
+}
+
+const getProfileId = () => profileEl.dataset.id;
+
+const updateProfileData = ({
+  name,
+  about,
+}) => updateUserData({
+  name,
+  about,
+})
+  .then((userData) => {
+    renderUserData({
+      name: userData.name,
+      about: userData.about,
+    });
+  });
 
 const profileEditButtonHandler = () => {
   clearForm({
@@ -56,13 +92,22 @@ const profileEditButtonHandler = () => {
   deactivateButton(profileFormSubmitEl, inactiveButtonClass);
 };
 
+const switchText = (element, text) => {
+  element.textContent = text;
+};
+
 const profileFormSubmitHandler = (e) => {
   e.preventDefault();
-  setProfileData({
+  const prevText = profileFormSubmitEl.textContent;
+  switchText(profileFormSubmitEl, 'Сохранение...');
+  updateProfileData({
     name: profileFormNameEl.value,
-    caption: profileFormCaptionEl.value,
-  });
-  closeModal(modalProfileEl);
+    about: profileFormCaptionEl.value,
+  })
+    .finally(() => {
+      switchText(profileFormSubmitEl, prevText);
+      closeModal(modalProfileEl);
+    });
 };
 
 const newCardButtonHandler = () => {
@@ -82,27 +127,76 @@ const addCardToContainer = (card, container) => {
 
 const formNewCardSubmitHandler = (e) => {
   e.preventDefault();
-  const cardNode = createCardNode({
-    heading: newCardFormHeadingEl.value,
-    imageLink: newCardFormImageLinkEl.value,
-  });
-  addCardToContainer(cardNode, cardsContainerEl);
-  closeModal(modalNewCardEl);
+
+  const name = newCardFormHeadingEl.value;
+  const link = newCardFormImageLinkEl.value;
+  const prevText = newCardFormSubmitEl.textContent;
+  switchText(newCardFormSubmitEl, 'Сохранение...');
+  createCard({
+    name,
+    link,
+  })
+    .then((card) => {
+      const cardNode = createCardNode({
+        heading: card.name,
+        imageLink: card.link,
+        id: card._id,
+        ownCard: true,
+      });
+      addCardToContainer(cardNode, cardsContainerEl);
+    })
+    .finally(() => {
+      switchText(newCardFormSubmitEl, prevText);
+      closeModal(modalNewCardEl);
+    });
 };
+
+const avatarButtonHandler = () => {
+  openModal(modalAvatarEl);
+};
+
+const avatarSubmitHandler = (e) => {
+  e.preventDefault();
+  const avatarLink = avatarFormLink.value;
+  const prevText = avatarSubmitButton.textContent;
+  switchText(avatarSubmitButton, 'Сохранение...');
+  updateAvatar(avatarLink)
+    .then((user) => {
+      setAvatar({
+        avatar: user.avatar,
+        alt: user.name,
+      });
+    })
+    .finally(() => {
+      switchText(avatarSubmitButton, prevText);
+      closeModal(modalAvatarEl);
+    });
+};
+
+profileAvatarButton.addEventListener('click', avatarButtonHandler);
+avatarFormEl.addEventListener('submit', avatarSubmitHandler);
 
 profileEditButtonEl.addEventListener('click', profileEditButtonHandler);
 addCardButtonEl.addEventListener('click', newCardButtonHandler);
 profileFormEl.addEventListener('submit', profileFormSubmitHandler);
 newCardFormEl.addEventListener('submit', formNewCardSubmitHandler);
 
-const renderCards = () => {
-  cards.forEach((cardObj) => {
-    const cardNode = createCardNode({
-      heading: cardObj.name,
-      imageLink: cardObj.link,
+const renderCards = (cards = []) => {
+  const profileId = getProfileId();
+
+  cards.slice()
+    .reverse()
+    .forEach((card) => {
+      const cardNode = createCardNode({
+        heading: card.name,
+        imageLink: card.link,
+        likes: card.likes.length,
+        id: card._id,
+        ownCard: (profileId === card.owner._id),
+        liked: (card.likes.find((user) => user._id === profileId)),
+      });
+      addCardToContainer(cardNode, cardsContainerEl);
     });
-    addCardToContainer(cardNode, cardsContainerEl);
-  });
 };
 
 enableValidation({
@@ -114,10 +208,24 @@ enableValidation({
   errorClass,
 });
 
-renderCards();
 initModals();
 
-setProfileData({
-  name: 'Жак-Ив Кусто',
-  caption: 'Исследователь океана',
-});
+fetchUserInfo()
+  .then((user) => {
+    renderUserData({
+      name: user.name,
+      about: user.about,
+      id: user._id,
+    });
+    setAvatar({
+      avatar: user.avatar,
+      alt: user.name,
+    });
+  })
+  .then(() => {
+    fetchCards()
+      .then(renderCards);
+  })
+  .catch((errorMessage) => {
+    console.log(errorMessage);
+  });
