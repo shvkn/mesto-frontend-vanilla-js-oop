@@ -1,6 +1,6 @@
 .site-layout {
   display: grid;
-  grid-template-rows: 55px [header] auto 40px [content] auto 66px [footer] auto 60px;
+  grid-template-rows: 45px [header] auto 40px [content] auto 66px [footer] auto 60px;
   max-width: 880px;
   min-width: 320px;
   margin: 0 auto;
