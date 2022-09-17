@@ -3,11 +3,11 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  extends: [
-    'airbnb',
-  ],
+  extends: ['airbnb'],
   rules: {
     indent: ['error', 2],
     'no-param-reassign': 0,
+    'no-underscore-dangle': 0,
+    'class-methods-use-this': 0,
   },
 };
