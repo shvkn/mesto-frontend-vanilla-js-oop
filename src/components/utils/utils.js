@@ -1,5 +1,5 @@
-import { closeModal } from './modal';
-import { hideInputError } from './validation';
+import { closeModal } from '../modal';
+import { hideInputError } from '../validation';
 
 export const initModals = () => {
   document.querySelectorAll('.modal')

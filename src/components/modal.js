@@ -1,6 +1,4 @@
-const modalImageEl = document.querySelector('#modal-image');
-const modalImageCoverEl = modalImageEl.querySelector('.modal__cover-image');
-const modalImageHeadingEl = modalImageEl.querySelector('.modal__heading');
+import { modalImageCoverEl, modalImageEl, modalImageHeadingEl } from './utils/constants';
 
 const closeByEsc = (e) => {
   if (e.key === 'Escape') {

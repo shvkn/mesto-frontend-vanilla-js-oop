@@ -1,45 +1,38 @@
 import { deactivateButton, enableValidation } from './validation';
 import { createCardNode } from './card';
 import { closeModal, openModal } from './modal';
-import { clearForm, initModals } from './utils';
+import { clearForm, initModals } from './utils/utils';
+import { createCard, fetchCards, fetchUserInfo, updateAvatar, updateUserData, } from './api';
 import {
-  createCard, fetchCards, fetchUserInfo, updateAvatar, updateUserData,
-} from './api';
-
-const cardsContainerEl = document.querySelector('.cards');
-const modalNewCardEl = document.querySelector('#modal-new-card');
-const addCardButtonEl = document.querySelector('.profile__add-button');
-
-const newCardFormEl = document.querySelector('#form-new-card');
-const newCardFormHeadingEl = newCardFormEl.querySelector('#new-card-heading');
-const newCardFormImageLinkEl = newCardFormEl.querySelector('#new-card-link');
-const newCardFormSubmitEl = newCardFormEl.querySelector('.form__submit');
-
-const modalProfileEl = document.querySelector('#modal-profile');
-const profileFormEl = modalProfileEl.querySelector('#form-profile');
-const profileFormNameEl = profileFormEl.querySelector('#profile-name');
-const profileFormCaptionEl = profileFormEl.querySelector('#profile-caption');
-const profileFormSubmitEl = profileFormEl.querySelector('.form__submit');
-
-const profileEl = document.querySelector('.profile');
-const profileEditButtonEl = profileEl.querySelector('.profile__edit-button');
-const profileNameEl = profileEl.querySelector('.profile__name');
-const profileCaptionEl = profileEl.querySelector('.profile__caption');
-
-const profileAvatarImageEl = profileEl.querySelector('.profile__avatar-image');
-const profileAvatarButton = profileEl.querySelector('.profile__avatar-change-button');
-
-const modalAvatarEl = document.querySelector('#modal-avatar');
-const avatarFormEl = modalAvatarEl.querySelector('#form-avatar');
-const avatarFormLink = avatarFormEl.querySelector('#avatar-link');
-const avatarSubmitButton = avatarFormEl.querySelector('.form__submit');
-
-const formSelectorClass = '.form';
-const inputSelectorClass = '.form__input';
-const submitButtonSelectorClass = '.form__submit';
-const inactiveButtonClass = 'form__submit_inactive';
-const inputErrorClass = 'form__input_type_error';
-const errorClass = 'form__input-error_active';
+  addCardButtonEl,
+  avatarFormEl,
+  avatarFormLink,
+  avatarSubmitButton,
+  cardsContainerEl,
+  errorClass,
+  formSelectorClass,
+  inactiveButtonClass,
+  inputErrorClass,
+  inputSelectorClass,
+  modalAvatarEl,
+  modalNewCardEl,
+  modalProfileEl,
+  newCardFormEl,
+  newCardFormHeadingEl,
+  newCardFormImageLinkEl,
+  newCardFormSubmitEl,
+  profileAvatarButton,
+  profileAvatarImageEl,
+  profileCaptionEl,
+  profileEditButtonEl,
+  profileEl,
+  profileFormCaptionEl,
+  profileFormEl,
+  profileFormNameEl,
+  profileFormSubmitEl,
+  profileNameEl,
+  submitButtonSelectorClass
+} from './utils/constants';
 
 const getProfileData = () => {
   profileFormNameEl.value = profileNameEl.textContent;
