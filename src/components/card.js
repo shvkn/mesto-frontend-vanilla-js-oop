@@ -1,11 +1,6 @@
-import {
-  closeModal, getConfirm, openImageModal, openModal,
-} from './modal';
+import { closeModal, getConfirm, openImageModal, openModal, } from './modal';
 import { deleteCard, setLike, unsetLike } from './api';
-
-const cardTemplate = document.querySelector('#card-template');
-const cardLikeButtonActiveClass = 'card__like-button_active';
-const modalConfirm = document.querySelector('#modal-confirm');
+import { cardLikeButtonActiveClass, cardTemplate, modalConfirm } from './utils/constants';
 
 const handleLikeButtonClick = (e) => {
   const { id } = e.target.dataset;
