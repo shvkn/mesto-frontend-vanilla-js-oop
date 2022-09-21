@@ -1,8 +1,8 @@
 import { deactivateButton, enableValidation } from './validation';
-import { createCardNode } from './card';
+import { createCardNode, Card } from './card';
 import { closeModal, openModal } from './modal';
 import { clearForm, initModals } from './utils/utils';
-import { createCard, fetchCards, fetchUserInfo, updateAvatar, updateUserData, } from './api';
+import Api from './Api';
 import {
   addCardButtonEl,
   avatarFormEl,
@@ -31,7 +31,7 @@ import {
   profileFormNameEl,
   profileFormSubmitEl,
   profileNameEl,
-  submitButtonSelectorClass
+  submitButtonSelectorClass,
 } from './utils/constants';
 
 const getProfileData = () => {
@@ -205,10 +205,16 @@ enableValidation({
 });
 
 initModals();
+// Code
+
+const api = new Api({
+  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-14',
+  token: 'a9c10068-1239-4b61-97d8-9278a4fcdf82',
+});
 
 Promise.all([
-  fetchUserInfo(),
-  fetchCards(),
+  api.fetchUserInfo(),
+  api.fetchCards(),
 ])
   .then(([user, cards]) => {
     renderUserData({
@@ -220,6 +226,32 @@ Promise.all([
       avatar: user.avatar,
       alt: user.name,
     });
-    renderCards(cards);
+    // renderCards(cards);
+    cards.forEach((cardData) => {
+      const card = new Card({
+        data: cardData,
+        selector: '#card-template',
+        handleLike: (id) => {
+          if (card.isLiked()) {
+            api.unsetLike(id).then((updatedCardData) => {
+              card.setLikes(updatedCardData.likes);
+              card.toggleLikes();
+            });
+          } else {
+            api.setLike(id).then((updatedCardData) => {
+              card.setLikes(updatedCardData.likes);
+              card.toggleLikes();
+            });
+          }
+        },
+        isLiked: cardData.likes.some((like) => like._id === user._id),
+        handleRemove: (id) => {
+          api.deleteCard(id).then(() => { card.remove(); });
+        },
+        isOwner: cardData.owner._id === user._id,
+      });
+      const cardElement = card.generate();
+      cardsContainerEl.append(cardElement);
+    });
   })
   .catch((error) => console.log(error));
