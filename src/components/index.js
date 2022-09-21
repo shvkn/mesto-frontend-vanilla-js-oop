@@ -33,6 +33,7 @@ import {
   profileNameEl,
   submitButtonSelectorClass,
 } from './utils/constants';
+import FormValidator from './FormValidator';
 
 const getProfileData = () => {
   profileFormNameEl.value = profileNameEl.textContent;
@@ -195,14 +196,33 @@ const renderCards = (cards) => {
     });
 };
 
-enableValidation({
+/* enableValidation({
   formSelectorClass,
   inputSelectorClass,
   submitButtonSelectorClass,
   inactiveButtonClass,
   inputErrorClass,
   errorClass,
-});
+}); */
+const validatorConfig = {
+  formSelectorClass,
+  inputSelectorClass,
+  submitButtonSelectorClass,
+  inactiveButtonClass,
+  inputErrorClass,
+  errorClass,
+}
+const profileFormElement = document.querySelector('#form-profile');
+const profileInfoFormValidator = new FormValidator({config: validatorConfig, formElement: profileFormElement});
+profileInfoFormValidator.enableValidation();
+
+const avatarFormElement = document.querySelector('#form-avatar');
+const avatarFormValidator = new FormValidator({ config: validatorConfig, formElement: avatarFormElement});
+avatarFormValidator.enableValidation();
+
+const newCardFormElement = document.querySelector('#form-new-card');
+const newCardFormValidator = new FormValidator({ config: validatorConfig, formElement: avatarFormElement});
+newCardFormValidator.enableValidation();
 
 initModals();
 // Code
