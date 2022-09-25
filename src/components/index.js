@@ -36,6 +36,7 @@ import {
 import FormValidator from './FormValidator';
 import Section from './Section';
 import PopupWithImage from "./PopupWithImage";
+import UserInfo from "./UserInfo";
 
 const getProfileData = () => {
   profileFormNameEl.value = profileNameEl.textContent;
@@ -236,6 +237,12 @@ const api = new Api({
 
 const popupWithImage = new PopupWithImage('#modal-image');
 
+const userInfo = new UserInfo({
+  name: '.profile__name',
+  about: '.profile__caption',
+  avatar: '.profile__avatar-image',
+});
+
 Promise.all([
   api.fetchUserInfo(),
   api.fetchCards(),
@@ -279,14 +286,6 @@ Promise.all([
 
     cardSectionList.renderItems(cards);
 
-    renderUserData({
-      name: user.name,
-      about: user.about,
-      id: user._id,
-    });
-    setAvatar({
-      avatar: user.avatar,
-      alt: user.name,
-    });
+    userInfo.setUserInfo(user);
   })
   .catch((error) => console.log(error));
