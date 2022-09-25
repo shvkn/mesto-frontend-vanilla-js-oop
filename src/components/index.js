@@ -34,6 +34,7 @@ import {
   submitButtonSelectorClass,
 } from './utils/constants';
 import FormValidator from './FormValidator';
+import Section from './Section';
 
 const getProfileData = () => {
   profileFormNameEl.value = profileNameEl.textContent;
@@ -211,17 +212,17 @@ const validatorConfig = {
   inactiveButtonClass,
   inputErrorClass,
   errorClass,
-}
+};
 const profileFormElement = document.querySelector('#form-profile');
-const profileInfoFormValidator = new FormValidator({config: validatorConfig, formElement: profileFormElement});
+const profileInfoFormValidator = new FormValidator({ config: validatorConfig, formElement: profileFormElement });
 profileInfoFormValidator.enableValidation();
 
 const avatarFormElement = document.querySelector('#form-avatar');
-const avatarFormValidator = new FormValidator({ config: validatorConfig, formElement: avatarFormElement});
+const avatarFormValidator = new FormValidator({ config: validatorConfig, formElement: avatarFormElement });
 avatarFormValidator.enableValidation();
 
 const newCardFormElement = document.querySelector('#form-new-card');
-const newCardFormValidator = new FormValidator({ config: validatorConfig, formElement: avatarFormElement});
+const newCardFormValidator = new FormValidator({ config: validatorConfig, formElement: avatarFormElement });
 newCardFormValidator.enableValidation();
 
 initModals();
@@ -237,6 +238,41 @@ Promise.all([
   api.fetchCards(),
 ])
   .then(([user, cards]) => {
+    const cardSectionList = new Section({
+      items: cards,
+      renderer: (cardData) => {
+
+        const isOwner = cardData.owner._id === user._id;
+        const isLiked = cardData.likes.some((like) => like._id === user._id);
+        const card = new Card({
+          data: cardData,
+          selector: '#card-template',
+          handleLike: (id) => {
+            if (card.isLiked()) {
+              api.unsetLike(id).then((updatedCardData) => {
+                card.setLikes(updatedCardData.likes);
+                card.toggleLikes();
+              });
+            } else {
+              api.setLike(id).then((updatedCardData) => {
+                card.setLikes(updatedCardData.likes);
+                card.toggleLikes();
+              });
+            }
+          },
+          isLiked: isLiked,
+          handleRemove: (id) => {
+            api.deleteCard(id).then(() => { card.remove(); });
+          },
+          isOwner: isOwner,
+        });
+        const cardElement = card.generate();
+        cardSectionList.addItem(cardElement);
+      },
+    }, '.cards');
+
+    cardSectionList.renderItems(cards);
+
     renderUserData({
       name: user.name,
       about: user.about,
@@ -245,33 +281,6 @@ Promise.all([
     setAvatar({
       avatar: user.avatar,
       alt: user.name,
-    });
-    // renderCards(cards);
-    cards.forEach((cardData) => {
-      const card = new Card({
-        data: cardData,
-        selector: '#card-template',
-        handleLike: (id) => {
-          if (card.isLiked()) {
-            api.unsetLike(id).then((updatedCardData) => {
-              card.setLikes(updatedCardData.likes);
-              card.toggleLikes();
-            });
-          } else {
-            api.setLike(id).then((updatedCardData) => {
-              card.setLikes(updatedCardData.likes);
-              card.toggleLikes();
-            });
-          }
-        },
-        isLiked: cardData.likes.some((like) => like._id === user._id),
-        handleRemove: (id) => {
-          api.deleteCard(id).then(() => { card.remove(); });
-        },
-        isOwner: cardData.owner._id === user._id,
-      });
-      const cardElement = card.generate();
-      cardsContainerEl.append(cardElement);
     });
   })
   .catch((error) => console.log(error));
