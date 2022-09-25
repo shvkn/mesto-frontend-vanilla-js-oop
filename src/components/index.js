@@ -35,178 +35,16 @@ import {
 } from './utils/constants';
 import FormValidator from './FormValidator';
 import Section from './Section';
-import PopupWithImage from "./PopupWithImage";
-import UserInfo from "./UserInfo";
-
-const getProfileData = () => {
-  profileFormNameEl.value = profileNameEl.textContent;
-  profileFormCaptionEl.value = profileCaptionEl.textContent;
-};
-
-function setAvatar({
-  avatar,
-  alt,
-}) {
-  profileAvatarImageEl.src = avatar;
-  profileAvatarImageEl.alt = alt;
-}
-
-function renderUserData({
-  name,
-  about,
-  id,
-}) {
-  profileEl.dataset.id = id;
-  profileNameEl.textContent = name;
-  profileCaptionEl.textContent = about;
-}
-
-const getProfileId = () => profileEl.dataset.id;
-
-const updateProfileData = ({
-  name,
-  about,
-}) => updateUserData({
-  name,
-  about,
-})
-  .then((userData) => {
-    renderUserData({
-      name: userData.name,
-      about: userData.about,
-    });
-  })
-  .catch((error) => console.log(error));
-
-const handleProfileEditButtonClick = () => {
-  clearForm({
-    formElement: profileFormEl,
-    inputSelectorClass,
-    inputErrorClass,
-    errorClass,
-  });
-  getProfileData();
-  openModal(modalProfileEl);
-  deactivateButton(profileFormSubmitEl, inactiveButtonClass);
-};
+import PopupWithImage from './PopupWithImage';
+import UserInfo from './UserInfo';
+import PopupWithForm from './PopupWithForm';
 
 const switchText = (element, text) => {
   element.textContent = text;
 };
 
-const handleProfileFormSubmit = (e) => {
-  e.preventDefault();
-  const prevText = profileFormSubmitEl.textContent;
-  switchText(profileFormSubmitEl, 'Сохранение...');
-  updateProfileData({
-    name: profileFormNameEl.value,
-    about: profileFormCaptionEl.value,
-  })
-    .then(() => closeModal(modalProfileEl))
-    .catch((error) => console.log(error))
-    .finally(() => {
-      switchText(profileFormSubmitEl, prevText);
-    });
-};
+// OOP Code
 
-const handleNewCardButtonClick = () => {
-  clearForm({
-    formElement: newCardFormEl,
-    inputSelectorClass,
-    inputErrorClass,
-    errorClass,
-  });
-  openModal(modalNewCardEl);
-  deactivateButton(newCardFormSubmitEl, inactiveButtonClass);
-};
-
-const addCardToContainer = (card, container) => {
-  container.prepend(card);
-};
-
-const handleNewCardFormSubmit = (e) => {
-  e.preventDefault();
-  const name = newCardFormHeadingEl.value;
-  const link = newCardFormImageLinkEl.value;
-  const prevText = newCardFormSubmitEl.textContent;
-  switchText(newCardFormSubmitEl, 'Сохранение...');
-  createCard({
-    name,
-    link,
-  })
-    .then((card) => {
-      const cardNode = createCardNode({
-        heading: card.name,
-        imageLink: card.link,
-        id: card._id,
-        ownCard: true,
-      });
-      addCardToContainer(cardNode, cardsContainerEl);
-      closeModal(modalNewCardEl);
-    })
-    .catch((error) => console.log(error))
-    .finally(() => {
-      switchText(newCardFormSubmitEl, prevText);
-    });
-};
-
-const handleAvatarChangeButtonClick = () => {
-  openModal(modalAvatarEl);
-};
-
-const handleAvatarFormSubmit = (e) => {
-  e.preventDefault();
-  const avatarLink = avatarFormLink.value;
-  const prevText = avatarSubmitButton.textContent;
-  switchText(avatarSubmitButton, 'Сохранение...');
-  updateAvatar(avatarLink)
-    .then((user) => {
-      setAvatar({
-        avatar: user.avatar,
-        alt: user.name,
-      });
-      closeModal(modalAvatarEl);
-    })
-    .catch((error) => console.log(error))
-    .finally(() => {
-      switchText(avatarSubmitButton, prevText);
-    });
-};
-
-profileAvatarButton.addEventListener('click', handleAvatarChangeButtonClick);
-avatarFormEl.addEventListener('submit', handleAvatarFormSubmit);
-
-profileEditButtonEl.addEventListener('click', handleProfileEditButtonClick);
-addCardButtonEl.addEventListener('click', handleNewCardButtonClick);
-profileFormEl.addEventListener('submit', handleProfileFormSubmit);
-newCardFormEl.addEventListener('submit', handleNewCardFormSubmit);
-
-const renderCards = (cards) => {
-  const profileId = getProfileId();
-
-  cards.slice()
-    .reverse()
-    .forEach((card) => {
-      const cardNode = createCardNode({
-        heading: card.name,
-        imageLink: card.link,
-        likes: card.likes.length,
-        id: card._id,
-        ownCard: (profileId === card.owner._id),
-        liked: (card.likes.find((user) => user._id === profileId)),
-      });
-      addCardToContainer(cardNode, cardsContainerEl);
-    });
-};
-
-/* enableValidation({
-  formSelectorClass,
-  inputSelectorClass,
-  submitButtonSelectorClass,
-  inactiveButtonClass,
-  inputErrorClass,
-  errorClass,
-}); */
 const validatorConfig = {
   formSelectorClass,
   inputSelectorClass,
@@ -216,19 +54,27 @@ const validatorConfig = {
   errorClass,
 };
 const profileFormElement = document.querySelector('#form-profile');
-const profileInfoFormValidator = new FormValidator({ config: validatorConfig, formElement: profileFormElement });
+const profileInfoFormValidator = new FormValidator({
+  config: validatorConfig,
+  formElement: profileFormElement
+});
 profileInfoFormValidator.enableValidation();
 
 const avatarFormElement = document.querySelector('#form-avatar');
-const avatarFormValidator = new FormValidator({ config: validatorConfig, formElement: avatarFormElement });
+const avatarFormValidator = new FormValidator({
+  config: validatorConfig,
+  formElement: avatarFormElement
+});
 avatarFormValidator.enableValidation();
 
 const newCardFormElement = document.querySelector('#form-new-card');
-const newCardFormValidator = new FormValidator({ config: validatorConfig, formElement: avatarFormElement });
-newCardFormValidator.enableValidation();
 
-initModals();
-// Code
+const newCardFormValidator = new FormValidator({
+  config: validatorConfig,
+  formElement: newCardFormElement
+});
+
+newCardFormValidator.enableValidation();
 
 const api = new Api({
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-14',
@@ -243,6 +89,128 @@ const userInfo = new UserInfo({
   avatar: '.profile__avatar-image',
 });
 
+const popupProfile = new PopupWithForm({
+  selector: '#modal-profile',
+  handleSubmit: (values) => {
+    const name = values['profile-name'];
+    const about = values['profile-caption'];
+
+    const submitButton = popupNewCard.getSubmitButton();
+    const prevText = submitButton.textContent;
+    switchText(submitButton, 'Сохранение...');
+
+    api.updateUserData({
+      name,
+      about
+    })
+      .then((user) => {
+        userInfo.setUserInfo(user);
+      })
+      .finally(() => {
+        switchText(submitButton, prevText);
+      })
+      .catch((error) => console.log(error));
+  }
+});
+
+popupProfile.setEventListeners();
+
+const popupAvatar = new PopupWithForm({
+  selector: '#modal-avatar',
+  handleSubmit: (values) => {
+    const link = values['avatar-link'];
+
+    const submitButton = popupNewCard.getSubmitButton();
+    const prevText = submitButton.textContent;
+    switchText(submitButton, 'Сохранение...');
+
+    api.updateAvatar(link)
+      .then((user) => {
+        userInfo.setUserInfo(user);
+      })
+      .finally(() => {
+        switchText(submitButton, prevText);
+      })
+      .catch((error) => console.log(error));
+  }
+});
+
+popupAvatar.setEventListeners();
+
+const popupNewCard = new PopupWithForm({
+  selector: '#modal-new-card',
+  handleSubmit: (values) => {
+
+    const submitButton = popupNewCard.getSubmitButton();
+    const prevText = submitButton.textContent;
+    switchText(submitButton, 'Сохранение...');
+
+    api.createCard({
+      name: values['new-card-heading'],
+      link: values['new-card-link']
+    })
+      .then((cardData) => {
+        const card = createCard(cardData, false, true);
+        const cardElement = card.generate();
+
+      })
+      .finally(() => {
+        switchText(submitButton, prevText);
+      })
+      .catch((error) => console.log(error));
+  }
+});
+profileEditButtonEl.addEventListener('click', () => {
+  const user = userInfo.getUserInfo();
+  popupProfile.setInputValues({
+    'profile-name': user.name,
+    'profile-caption': user.about
+  });
+  popupProfile.open();
+});
+
+profileAvatarButton.addEventListener('click', () => {
+  popupAvatar.open();
+});
+
+addCardButtonEl.addEventListener('click', () => {
+
+});
+
+function createCard(cardData, isLiked, isOwner) {
+  const card = new Card({
+    data: cardData,
+    selector: '#card-template',
+    handleLike: (id) => {
+      if (card.isLiked()) {
+        api.unsetLike(id)
+          .then((updatedCardData) => {
+            card.setLikes(updatedCardData.likes);
+            card.toggleLikes();
+          });
+      } else {
+        api.setLike(id)
+          .then((updatedCardData) => {
+            card.setLikes(updatedCardData.likes);
+            card.toggleLikes();
+          });
+      }
+    },
+    handleClick: (image, text) => {
+      popupWithImage.open(image, text);
+    },
+    isLiked: isLiked,
+    handleRemove: (id) => {
+      api.deleteCard(id)
+        .then(() => {
+          card.remove();
+        });
+    },
+    isOwner: isOwner,
+  });
+  return card;
+}
+
 Promise.all([
   api.fetchUserInfo(),
   api.fetchCards(),
@@ -251,41 +219,15 @@ Promise.all([
     const cardSectionList = new Section({
       items: cards,
       renderer: (cardData) => {
-
         const isOwner = cardData.owner._id === user._id;
         const isLiked = cardData.likes.some((like) => like._id === user._id);
-        const card = new Card({
-          data: cardData,
-          selector: '#card-template',
-          handleLike: (id) => {
-            if (card.isLiked()) {
-              api.unsetLike(id).then((updatedCardData) => {
-                card.setLikes(updatedCardData.likes);
-                card.toggleLikes();
-              });
-            } else {
-              api.setLike(id).then((updatedCardData) => {
-                card.setLikes(updatedCardData.likes);
-                card.toggleLikes();
-              });
-            }
-          },
-          handleClick: (image, text) => {
-            popupWithImage.open(image, text);
-          },
-          isLiked: isLiked,
-          handleRemove: (id) => {
-            api.deleteCard(id).then(() => { card.remove(); });
-          },
-          isOwner: isOwner,
-        });
+        const card = createCard(cardData, isLiked, isOwner);
         const cardElement = card.generate();
         cardSectionList.addItem(cardElement);
       },
     }, '.cards');
 
     cardSectionList.renderItems(cards);
-
     userInfo.setUserInfo(user);
   })
   .catch((error) => console.log(error));
