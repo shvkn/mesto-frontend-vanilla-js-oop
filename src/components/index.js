@@ -35,6 +35,7 @@ import {
 } from './utils/constants';
 import FormValidator from './FormValidator';
 import Section from './Section';
+import PopupWithImage from "./PopupWithImage";
 
 const getProfileData = () => {
   profileFormNameEl.value = profileNameEl.textContent;
@@ -233,6 +234,8 @@ const api = new Api({
   token: 'a9c10068-1239-4b61-97d8-9278a4fcdf82',
 });
 
+const popupWithImage = new PopupWithImage('#modal-image');
+
 Promise.all([
   api.fetchUserInfo(),
   api.fetchCards(),
@@ -259,6 +262,9 @@ Promise.all([
                 card.toggleLikes();
               });
             }
+          },
+          handleClick: (image, text) => {
+            popupWithImage.open(image, text);
           },
           isLiked: isLiked,
           handleRemove: (id) => {

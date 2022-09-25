@@ -6,7 +6,7 @@ import {cardLikeButtonActiveClass, cardTemplate, modalConfirm} from './utils/con
 
 export class Card {
   constructor({
-                data, selector, handleLike, isLiked, handleRemove, isOwner
+                data, selector, handleLike, isLiked, handleRemove, isOwner, handleClick
               }) {
     this._data = data;
     this._selector = selector;
@@ -18,6 +18,7 @@ export class Card {
     this._isLiked = isLiked;
     this._handleRemove = handleRemove;
     this._isOwner = isOwner;
+    this._handleClick = handleClick;
   }
 
   _getElement() {
@@ -69,6 +70,9 @@ export class Card {
         this._handleRemove(this._id);
       });
     }
+    this._imageElement.addEventListener('click', () => {
+      this._handleClick(this._image, this._name);
+    });
   }
 
   remove() {
