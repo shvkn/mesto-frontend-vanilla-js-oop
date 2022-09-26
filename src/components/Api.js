@@ -1,5 +1,9 @@
 export default class Api {
-  constructor({ baseUrl, token }) {
+
+  constructor({
+    baseUrl,
+    token
+  }) {
     this._baseUrl = baseUrl;
     this._token = token;
     this._headers = {
@@ -31,7 +35,10 @@ export default class Api {
       .then(this._processResponse);
   }
 
-  updateUserData({ name, about }) {
+  updateUserData({
+    name,
+    about
+  }) {
     return fetch(
       `${this._baseUrl}/users/me`,
       {
