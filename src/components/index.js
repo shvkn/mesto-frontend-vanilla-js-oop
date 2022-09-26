@@ -56,14 +56,14 @@ const validatorConfig = {
 const profileFormElement = document.querySelector('#form-profile');
 const profileInfoFormValidator = new FormValidator({
   config: validatorConfig,
-  formElement: profileFormElement
+  formElement: profileFormElement,
 });
 profileInfoFormValidator.enableValidation();
 
 const avatarFormElement = document.querySelector('#form-avatar');
 const avatarFormValidator = new FormValidator({
   config: validatorConfig,
-  formElement: avatarFormElement
+  formElement: avatarFormElement,
 });
 avatarFormValidator.enableValidation();
 
@@ -71,7 +71,7 @@ const newCardFormElement = document.querySelector('#form-new-card');
 
 const newCardFormValidator = new FormValidator({
   config: validatorConfig,
-  formElement: newCardFormElement
+  formElement: newCardFormElement,
 });
 
 newCardFormValidator.enableValidation();
@@ -101,7 +101,7 @@ const popupProfile = new PopupWithForm({
 
     api.updateUserData({
       name,
-      about
+      about,
     })
       .then((user) => {
         userInfo.setUserInfo(user);
@@ -110,7 +110,7 @@ const popupProfile = new PopupWithForm({
         switchText(submitButton, prevText);
       })
       .catch((error) => console.log(error));
-  }
+  },
 });
 
 popupProfile.setEventListeners();
@@ -132,7 +132,7 @@ const popupAvatar = new PopupWithForm({
         switchText(submitButton, prevText);
       })
       .catch((error) => console.log(error));
-  }
+  },
 });
 
 popupAvatar.setEventListeners();
@@ -140,31 +140,33 @@ popupAvatar.setEventListeners();
 const popupNewCard = new PopupWithForm({
   selector: '#modal-new-card',
   handleSubmit: (values) => {
-
     const submitButton = popupNewCard.getSubmitButton();
     const prevText = submitButton.textContent;
     switchText(submitButton, 'Сохранение...');
 
     api.createCard({
       name: values['new-card-heading'],
-      link: values['new-card-link']
+      link: values['new-card-link'],
     })
       .then((cardData) => {
         const card = createCard(cardData, false, true);
         const cardElement = card.generate();
-
+        cardSectionList.addItem(cardElement);
       })
       .finally(() => {
         switchText(submitButton, prevText);
       })
       .catch((error) => console.log(error));
-  }
+  },
 });
+
+popupNewCard.setEventListeners();
+
 profileEditButtonEl.addEventListener('click', () => {
   const user = userInfo.getUserInfo();
   popupProfile.setInputValues({
     'profile-name': user.name,
-    'profile-caption': user.about
+    'profile-caption': user.about,
   });
   popupProfile.open();
 });
@@ -174,7 +176,7 @@ profileAvatarButton.addEventListener('click', () => {
 });
 
 addCardButtonEl.addEventListener('click', () => {
-
+    popupNewCard.open();
 });
 
 function createCard(cardData, isLiked, isOwner) {
@@ -199,35 +201,36 @@ function createCard(cardData, isLiked, isOwner) {
     handleClick: (image, text) => {
       popupWithImage.open(image, text);
     },
-    isLiked: isLiked,
+    isLiked,
     handleRemove: (id) => {
       api.deleteCard(id)
         .then(() => {
           card.remove();
         });
     },
-    isOwner: isOwner,
+    isOwner,
   });
   return card;
 }
+
+const cardSectionList = new Section({
+  items: [],
+  renderer: (cardData) => {
+    const userId = userInfo.getUserInfo().id;
+    const isOwner = cardData.owner._id === userId;
+    const isLiked = cardData.likes.some((like) => like._id === userId);
+    const card = createCard(cardData, isLiked, isOwner);
+    const cardElement = card.generate();
+    cardSectionList.addItem(cardElement);
+  },
+}, '.cards');
 
 Promise.all([
   api.fetchUserInfo(),
   api.fetchCards(),
 ])
   .then(([user, cards]) => {
-    const cardSectionList = new Section({
-      items: cards,
-      renderer: (cardData) => {
-        const isOwner = cardData.owner._id === user._id;
-        const isLiked = cardData.likes.some((like) => like._id === user._id);
-        const card = createCard(cardData, isLiked, isOwner);
-        const cardElement = card.generate();
-        cardSectionList.addItem(cardElement);
-      },
-    }, '.cards');
-
-    cardSectionList.renderItems(cards);
     userInfo.setUserInfo(user);
+    cardSectionList.renderItems(cards.reverse());
   })
   .catch((error) => console.log(error));

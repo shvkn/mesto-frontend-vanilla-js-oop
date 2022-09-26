@@ -10,6 +10,7 @@ export default class UserInfo {
       name: this._nameElement.textContent,
       avatar: this._avatarElement.src,
       about: this._aboutElement.textContent,
+      id: this._id,
     };
     return user;
   }
@@ -18,5 +19,6 @@ export default class UserInfo {
     this._avatarElement.src = user.avatar;
     this._nameElement.textContent = user.name;
     this._aboutElement.textContent = user.about;
+    this._id = user._id;
   }
 }

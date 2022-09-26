@@ -6,7 +6,7 @@ import {cardLikeButtonActiveClass, cardTemplate, modalConfirm} from './utils/con
 
 export class Card {
   constructor({
-                data, selector, handleLike, isLiked, handleRemove, isOwner, handleClick
+                data, selector, handleLike, isLiked, handleRemove, isOwner, handleClick,
               }) {
     this._data = data;
     this._selector = selector;
@@ -123,10 +123,10 @@ export const createCardNode = ({
                                  heading,
                                  imageLink,
                                  id,
-  likes = 0,
-  ownCard = false,
-  liked = false,
-}) => {
+                                 likes = 0,
+                                 ownCard = false,
+                                 liked = false,
+                               }) => {
   const card = cardTemplate.content.querySelector('.card')
     .cloneNode(true);
   const cardImage = card.querySelector('.card__image');
