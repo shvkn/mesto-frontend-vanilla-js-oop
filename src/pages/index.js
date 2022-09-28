@@ -110,7 +110,6 @@ const popupProfile = new PopupWithForm({
       'profile-name': name,
       'profile-caption': about,
     } = values;
-    popupProfile.renderLoading(true);
     return api.updateUserData({
       name,
       about,
@@ -127,7 +126,6 @@ const popupAvatar = new PopupWithForm({
   selector: modalAvatarSelector,
   handleSubmit: (values) => {
     const { 'avatar-link': link } = values;
-    popupAvatar.renderLoading(true);
     return api.updateAvatar(link)
       .then((user) => {
         userInfo.setUserInfo(user);
@@ -145,7 +143,6 @@ const popupNewCard = new PopupWithForm({
       'new-card-heading': name,
       'new-card-link': link,
     } = values;
-    popupNewCard.renderLoading(true);
     return api.createCard({
       name,
       link,
