@@ -1,10 +1,10 @@
-import Card from './Card';
-import Api from './Api';
-import FormValidator from './FormValidator';
-import Section from './Section';
-import PopupWithImage from './PopupWithImage';
-import UserInfo from './UserInfo';
-import PopupWithForm from './PopupWithForm';
+import Card from '../components/Card';
+import Api from '../components/Api';
+import FormValidator from '../components/FormValidator';
+import Section from '../components/Section';
+import PopupWithImage from '../components/PopupWithImage';
+import UserInfo from '../components/UserInfo';
+import PopupWithForm from '../components/PopupWithForm';
 import {
   addCardButtonElement,
   cardsContainerSelector,
